@@ -22,7 +22,7 @@ getAll() {
         var results = {};
         // Browsers report selectors in lowercase
         for (var i = 0; i < rules.length; i++) {
-            const className =  rules[i].selectorText;
+            const className =  rules[i].selectorText.replace(`.${this.id} `,'');
             var cssText = rules[i].cssText.slice(rules[i].cssText.indexOf('{')+1);
             var attrs = cssText.split(';');
 
@@ -36,7 +36,7 @@ getAll() {
                 }
             }
               for (var testRule in ruleSet) { // We are going to add the rule iff it is not an empty object
-                results[rules[i].selectorText] = ruleSet;
+                results[className] = ruleSet;
                 break;
             }
         }
@@ -50,17 +50,16 @@ get(selector){
   
 add(selector, rules) {
   const sheet = this.sheet;
-  const cssCode = `#${this.id} ${selector} { ${rules} }`;
 	if (sheet.insertRule) {
-        sheet.insertRule(`${selector} { ${rules} }`, this.index);
+        sheet.insertRule(`.${this.id} ${selector} { ${rules} }`, this.index);
     } else {
-    sheet.addRule(selector, rules, this.index);
+    sheet.addRule(`.${this.id} ${selector}`, rules, this.index);
   }
   this.index++;
 }
   
   
-    createSheet(){
+createSheet(){
     if(!this.sheet){
     this.id = this.makeId();
     var styleNode = document.createElement('style');
@@ -70,12 +69,14 @@ add(selector, rules) {
     document.head.appendChild(styleNode);
     this.sheet = styleNode.sheet;
         } else {
-            console.log('You have already made a sheet')
+            console.log('You have already made a sheet');
+            
         }
+        return this.id;
     }
     createGlobal(){
     if(!this.sheet){  
-        this.id = this.makeId();
+        this.id = "";
         var styleNode = document.createElement('style');
         styleNode.type = 'text/css';
         styleNode.id = this.id;

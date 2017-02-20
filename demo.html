@@ -3,9 +3,10 @@
     <title>DEMO</title>
 </head>
 <body>
+    <div id="main">
     <h1>Fairybread</h1>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta quod recusandae, veritatis et aliquam illo ab, obcaecati quidem assumenda perferendis culpa est delectus illum corrupti ipsa, ut quis. Placeat, nemo?</p>
-
+    </div>
 </body>
 </html>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.23.1/babel.js"></script>
@@ -13,8 +14,8 @@
 <script src="./src/fairybread.js"></script>
 <script>
 
-    var sheet = new Fairybread;
-sheet.createSheet();
+var sheet = new Fairybread;
+var id = sheet.createSheet();
 sheet.add('a','color:red;');
 sheet.add('p','color:blue;');
 sheet.add('#main',`
@@ -25,5 +26,7 @@ sheet.add('#main',`
               padding:1em;
               font-family:'Open sans'
               `);
+console.log(id);
 console.log(sheet.get('p'));
+document.querySelector('#main').className = id;
 </script>
