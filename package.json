@@ -1,6 +1,6 @@
 {
   "name": "fairybread",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a js utility to manage css and replace sass",
   "main": "build.js",
   "scripts": {

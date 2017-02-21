@@ -1,32 +1,39 @@
 class Fairybread {
  constructor(id,sheet,rules){
- this.id = id;
+ this.id = this.makeId();
+ this.masterClass = `.${this.id}`;
  this.sheet = sheet;
  this.rules = rules;
  this.index = 0;
  this.global = false;
- 
+
 }
 
 makeId(){
         var text = "fairybread_";
         var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        for( var i=0; i < 5; i++ ){
+        for( var i=0; i < 20; i++ ){
             text += possible.charAt(Math.floor(Math.random() * possible.length));
         }
         return text;
     };
-
 getAll() {
-        var rules = this.sheet.cssRules || this.sheet.rules || [];
-        var results = {};
+        const rules = this.sheet.cssRules || this.sheet.rules || [];
+        let results = {};
+        let resultsMap = {};
+
+        resultsMap = rules.map((data, key) => {
+            console.log(key);
+        })
+
         // Browsers report selectors in lowercase
         for (var i = 0; i < rules.length; i++) {
-            const className =  rules[i].selectorText.replace(`.${this.id} `,'');
-            var cssText = rules[i].cssText.slice(rules[i].cssText.indexOf('{')+1);
-            var attrs = cssText.split(';');
+            // FIXME: remove masterClass if fontface
+            const className =  rules[i].selectorText.replace(`${this.masterClass} `,'');
+            const cssText = rules[i].cssText.slice(rules[i].cssText.indexOf('{')+1);
+            const attrs = cssText.split(';');
 
-            var ruleSet = {};
+            let ruleSet = {};
             for (var k = 0; k < attrs.length; ++k) {
                 var keyValue = attrs[k].split(':');
                 if (keyValue.length == 2) {
@@ -35,7 +42,8 @@ getAll() {
                     ruleSet[key] = value;
                 }
             }
-              for (var testRule in ruleSet) { // We are going to add the rule iff it is not an empty object
+            for (var testRule in ruleSet) {
+                // We are going to add the rule if it is not an empty object
                 results[className] = ruleSet;
                 break;
             }
@@ -43,25 +51,29 @@ getAll() {
         return results;
     }
 
-get(selector){
+extend(selector){
   const all = this.getAll();
   return all[selector];
 }
-  
+
 add(selector, rules) {
-  const sheet = this.sheet;
-	if (sheet.insertRule) {
-        sheet.insertRule(`.${this.id} ${selector} { ${rules} }`, this.index);
+	if (this.sheet.insertRule) {
+        this.sheet.insertRule(`${this.masterClass} ${selector} { ${rules} }`, this.index);
     } else {
-    sheet.addRule(`.${this.id} ${selector}`, rules, this.index);
+    this.sheet.addRule(`${this.masterClass} ${selector}`, rules, this.index);
   }
   this.index++;
 }
-  
-  
-createSheet(){
+
+// addFont(rules) {
+
+//     this.sheet.insertRule(`${rules}`, this.index);
+//     this.index++;
+// }
+
+
+createScope(){
     if(!this.sheet){
-    this.id = this.makeId();
     var styleNode = document.createElement('style');
     styleNode.type = 'text/css';
     styleNode.id = this.id;
@@ -69,14 +81,13 @@ createSheet(){
     document.head.appendChild(styleNode);
     this.sheet = styleNode.sheet;
         } else {
-            console.log('You have already made a sheet');
-            
+            console.error('You have already made a sheet on this instance')
         }
         return this.id;
     }
     createGlobal(){
-    if(!this.sheet){  
-        this.id = "";
+    if(!this.sheet){
+        this.masterClass = " ";
         var styleNode = document.createElement('style');
         styleNode.type = 'text/css';
         styleNode.id = this.id;
@@ -84,7 +95,7 @@ createSheet(){
         document.head.appendChild(styleNode);
         this.sheet = styleNode.sheet;
         } else {
-        console.log('You have already made a sheet')
+        console.error('You have already made a sheet on this instance')
         }
     }
  }

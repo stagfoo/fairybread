@@ -1,12 +1,15 @@
 <html>
 <head>
     <title>DEMO</title>
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
 </head>
 <body>
     <div id="main">
     <h1>Fairybread</h1>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta quod recusandae, veritatis et aliquam illo ab, obcaecati quidem assumenda perferendis culpa est delectus illum corrupti ipsa, ut quis. Placeat, nemo?</p>
+        <a href="">tet</a>
     </div>
+    <a href=""> not red</a>
 </body>
 </html>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.23.1/babel.js"></script>
@@ -15,8 +18,12 @@
 <script>
 
 var sheet = new Fairybread;
-var id = sheet.createSheet();
+var id = sheet.createScope();
+// sheet.createGlobal();
+
 sheet.add('a','color:red;');
+sheet.add('a:hover','color:green;');
+
 sheet.add('p','color:blue;');
 sheet.add('#main',`
               background:#efefef;
@@ -26,7 +33,17 @@ sheet.add('#main',`
               padding:1em;
               font-family:'Open sans'
               `);
-console.log(id);
-console.log(sheet.get('p'));
+// sheet.addFont(`
+//     @font-face {
+//     font-family: 'Permanent Marker';
+//     font-style: normal;
+//     font-weight: 400;
+//     src: local('Permanent Marker'), local('PermanentMarker'), url(https://fonts.gstatic.com/s/permanentmarker/v5/9vYsg5VgPHKK8SXYbf3sMio-5Z6V1O0VBgfXWFfbB4c.woff2) format('woff2');
+//     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+//     }`)
+console.log(sheet.extend('p'));
+console.log(sheet.getAll());
+
+// console.log(id);
 document.querySelector('#main').className = id;
 </script>
