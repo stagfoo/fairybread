@@ -13,14 +13,9 @@ class Fairybread {
  }
 
 makeId(){
-        const text = "fairybread_";
+        let text = "fairybread_";
         const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-	[...Array(20)].map((data,key) => {
-	text += possible.charAt(Math.floor(Math.random() * possible.length));	
-});
-        //for( var i=0; i < 20; i++ ){
-         //   text += possible.charAt(Math.floor(Math.random() * possible.length));
-        //}
+	    [...Array(20)].map((data,key) => { text += possible.charAt(Math.floor(Math.random() * possible.length)); });
         return text;
     };
 getAll() {

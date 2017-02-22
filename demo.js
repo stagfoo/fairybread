@@ -1,4 +1,4 @@
-import Fairybread from './src/fairybread';
+import Fairybread from './dist/fairybread';
 const vars = {
   colors: {
     yellow: '#FFFFBE',
