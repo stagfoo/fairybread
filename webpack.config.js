@@ -1,17 +1,24 @@
 const path = require('path');
 const webpack = require('webpack');
 module.exports = {
-  context: path.resolve(__dirname, './src'),
+  context: path.resolve(__dirname, './'),
   entry: {
-    app: './fairybread.js',
+    app: './demo.js',
   },
   module: {
   loaders: [
-    { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }
+    {
+      test: /\.js$/,
+      exclude: /(node_modules|bower_components)/,
+      loader: 'babel-loader',
+      query: {
+        presets: ['es2015']
+      }
+    }
   ]
  },
   output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: 'fairybread.min.js',
+    path: path.resolve(__dirname, 'docs'),
+    filename: 'bundle.js',
   },
 };
