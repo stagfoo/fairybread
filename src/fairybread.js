@@ -47,11 +47,9 @@ extend(selector){
 }
 
 add(selector, rules) {
-	if (this.sheet.insertRule) {
-        this.sheet.insertRule(`${this.masterClass} ${selector} { ${rules} }`, this.index);
-    } else {
-    this.sheet.addRule(`${this.masterClass} ${selector}`, rules, this.index);
-  }
+	
+this.sheet.insertRule ? this.sheet.insertRule(`${this.masterClass} ${selector} { ${rules} }`, this.index) : this.sheet.addRule(`${this.masterClass} ${selector}`, rules, this.index);
+
   this.index++;
 }
 
