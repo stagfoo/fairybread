@@ -4,10 +4,12 @@ you have probaby all read [this talk](https://speakerdeck.com/vjeux/react-css-in
 
 this little 2.4kb libraries interacts with style tags on the page to help you create pretty shit.
 
-`npm install fairybread`
+```
+npm install fairybread
+```
 
 ## Basic Setup
-```
+```js
 const colors: {
     yellow: '#FFFFBE',
   }
@@ -21,7 +23,7 @@ globalSheet.add('body',
 ```
 
 output in head
-```
+```html
 <style id="fairybread_xjRSIWrtA3kBepAHLZsM">
     body {
         background: #FFFFBE;
@@ -31,13 +33,13 @@ output in head
 As you may have guested `.createGlobal` create a global style globalSheet that will effect everything on the page (Ahh so scary!)
 
 ## Scoped Styles
-```
+```js
 var sheet = new Fairybread();
 var id = sheet.createScope();
 sheet.add('a','color:red;'); 
 ```
 output in head
-```
+```html
 <style id="fairybread_xjRSIWrtA3kBepAHLZsM">
     .fairybread_xjRSIWrtA3kBepAHLZsM a {
         background: #FFFFBE;
@@ -48,7 +50,7 @@ output in head
 
 ## Specials
 now i know all you designer types love the fonts and keyframes so you can add these as well.
-```
+```js
 sheet.addSpecial(` @font-face {
     font-family: 'Permanent Marker';
     font-style: normal;
@@ -61,7 +63,7 @@ sheet.addSpecial(` @font-face {
 Its global because most this like font-face and keyframe can't be scoped. this should also help you fix any styles not supported.
 
 ## Extend
-```
+```js
 var tag_color = sheet.extend('a').color;
 sheet.add ('.button', `color:${tag_color}`);
 // OR 
