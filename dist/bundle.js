@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -73,18 +73,28 @@
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Fairybread = function () {
-    function Fairybread(id, sheet, rules) {
+    function Fairybread() {
         _classCallCheck(this, Fairybread);
 
-        this.id = id;
-        this.sheet = sheet;
-        this.rules = rules;
+        this.id = this.makeId();
+        this.masterClass = "." + this.id;
+        this.sheet = false;
+        this.specialSheet = false;
+        this.specialId = this.makeId() + "_special";
+        this.rules;
         this.index = 0;
+        this.specialIndex = 0;
         this.global = false;
     }
 
@@ -93,62 +103,67 @@ var Fairybread = function () {
         value: function makeId() {
             var text = "fairybread_";
             var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            for (var i = 0; i < 5; i++) {
+            [].concat(_toConsumableArray(Array(20))).map(function (data, key) {
                 text += possible.charAt(Math.floor(Math.random() * possible.length));
-            }
+            });
             return text;
         }
     }, {
         key: "getAll",
         value: function getAll() {
-            var rules = this.sheet.cssRules || this.sheet.rules || [];
-            var results = {};
-            // Browsers report selectors in lowercase
-            for (var i = 0; i < rules.length; i++) {
-                var className = rules[i].selectorText;
-                var cssText = rules[i].cssText.slice(rules[i].cssText.indexOf('{') + 1);
-                var attrs = cssText.split(';');
+            var _this = this;
 
+            var rules = this.sheet.cssRules || this.sheet.rules || {};
+            var results = {};
+            Object.keys(rules).map(function (key) {
+                var className = rules[key].selectorText.replace(_this.masterClass + " ", '');
+                var cssText = rules[key].cssText.slice(rules[key].cssText.indexOf('{') + 1).split(';');
                 var ruleSet = {};
-                for (var k = 0; k < attrs.length; ++k) {
-                    var keyValue = attrs[k].split(':');
-                    if (keyValue.length == 2) {
-                        var key = keyValue[0].trim();
-                        var value = keyValue[1].trim();
-                        ruleSet[key] = value;
+                cssText.map(function (data, key) {
+                    var keyValue = data.split(':');
+                    if (keyValue.length === 2) {
+                        ruleSet[keyValue[0].trim()] = keyValue[1].trim();
                     }
-                }
-                for (var testRule in ruleSet) {
-                    // We are going to add the rule iff it is not an empty object
-                    results[rules[i].selectorText] = ruleSet;
-                    break;
-                }
-            }
+                });
+                results[className] = ruleSet;
+            });
             return results;
         }
     }, {
-        key: "get",
-        value: function get(selector) {
+        key: "extend",
+        value: function extend(selector) {
             var all = this.getAll();
             return all[selector];
         }
     }, {
         key: "add",
         value: function add(selector, rules) {
-            var sheet = this.sheet;
-            var cssCode = "#" + this.id + " " + selector + " { " + rules + " }";
-            if (sheet.insertRule) {
-                sheet.insertRule(selector + " { " + rules + " }", this.index);
-            } else {
-                sheet.addRule(selector, rules, this.index);
-            }
+
+            this.sheet.insertRule ? this.sheet.insertRule(this.masterClass + " " + selector + " { " + rules + " }", this.index) : this.sheet.addRule(this.masterClass + " " + selector, rules, this.index);
+
             this.index++;
         }
     }, {
-        key: "createSheet",
-        value: function createSheet() {
-            if (!this.sheet) {
-                this.id = this.makeId();
+        key: "addSpecial",
+        value: function addSpecial(rule) {
+            var id = this.specialId;
+            if (this.specialSheet === false) {
+                var styleNode = document.createElement('style');
+                styleNode.type = 'text/css';
+                styleNode.id = id;
+                styleNode.rel = 'stylesheet';
+                document.head.appendChild(styleNode);
+                this.specialSheet = document.getElementById(id); //FIXME
+                this.specialSheet.innerHTML = rule;
+            } else {
+                console.log(this.specialSheet);
+                this.specialSheet.innerHTML += "\n" + rule;
+            }
+        }
+    }, {
+        key: "createScope",
+        value: function createScope() {
+            if (this.sheet === false) {
                 var styleNode = document.createElement('style');
                 styleNode.type = 'text/css';
                 styleNode.id = this.id;
@@ -156,14 +171,15 @@ var Fairybread = function () {
                 document.head.appendChild(styleNode);
                 this.sheet = styleNode.sheet;
             } else {
-                console.log('You have already made a sheet');
+                console.error('You have already made a sheet on this instance');
             }
+            return this.id;
         }
     }, {
         key: "createGlobal",
         value: function createGlobal() {
-            if (!this.sheet) {
-                this.id = this.makeId();
+            if (this.sheet === false) {
+                this.masterClass = " ";
                 var styleNode = document.createElement('style');
                 styleNode.type = 'text/css';
                 styleNode.id = this.id;
@@ -171,13 +187,60 @@ var Fairybread = function () {
                 document.head.appendChild(styleNode);
                 this.sheet = styleNode.sheet;
             } else {
-                console.log('You have already made a sheet');
+                console.error('You have already made a sheet on this instance');
             }
         }
     }]);
 
     return Fairybread;
 }();
+
+exports.default = Fairybread;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _fairybread = __webpack_require__(0);
+
+var _fairybread2 = _interopRequireDefault(_fairybread);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var vars = {
+  colors: {
+    yellow: '#FFFFBE',
+    orange: '#F7CD99',
+    pink: '#FF77A1',
+    purple: '#9886E8',
+    blue: '#97CACB'
+
+  }
+};
+
+var globalSheet = new _fairybread2.default();
+globalSheet.createGlobal();
+globalSheet.add('body', 'background:' + vars.colors.yellow);
+
+var sheet = new _fairybread2.default();
+var id = sheet.createScope();
+// sheet.createGlobal();
+
+sheet.add('a', 'color:red;');
+sheet.add('a:hover', 'color:green;');
+sheet.add('h1', 'font-family:"Permanent Marker"');
+sheet.add('p', 'color:blue; font-family: \'Roboto\';');
+sheet.add('#main', '\n              background:#efefef;\n              font-weight:bold;\n              width:900px;\n              margin:0 auto;\n              padding:1em;\n              ');
+sheet.addSpecial(' @font-face {\n    font-family: \'Permanent Marker\';\n    font-style: normal;\n    font-weight: 400;\n    src: local(\'Permanent Marker\'), local(\'PermanentMarker\'), url(https://fonts.gstatic.com/s/permanentmarker/v5/9vYsg5VgPHKK8SXYbf3sMio-5Z6V1O0VBgfXWFfbB4c.woff2) format(\'woff2\');\n    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;\n};');
+sheet.addSpecial('\n@font-face {\n  font-family: \'Roboto\';\n  font-style: normal;\n  font-weight: 400;\n  src: local(\'Roboto\'), local(\'Roboto-Regular\'), url(https://fonts.gstatic.com/s/roboto/v15/ek4gzZ-GeXAPcSbHtCeQI_esZW2xOQ-xsNqO47m55DA.woff2) format(\'woff2\');\n  unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F;\n};');
+console.log(sheet.extend('p'));
+console.log(sheet.getAll());
+
+// console.log(id);
+document.querySelector('#main').className = id;
 
 /***/ })
 /******/ ]);

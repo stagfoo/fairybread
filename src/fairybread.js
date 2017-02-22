@@ -1,53 +1,38 @@
 class Fairybread {
- constructor(id,sheet,rules){
+ constructor(){
  this.id = this.makeId();
  this.masterClass = `.${this.id}`;
- this.sheet = sheet;
- this.rules = rules;
+ this.sheet = false;
+ this.specialSheet = false;
+ this.specialId = this.makeId() + "_special";
+ this.rules;
  this.index = 0;
+ this.specialIndex = 0;
  this.global = false;
 
-}
+ }
 
 makeId(){
-        var text = "fairybread_";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        for( var i=0; i < 20; i++ ){
-            text += possible.charAt(Math.floor(Math.random() * possible.length));
-        }
+        let text = "fairybread_";
+        const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+	    [...Array(20)].map((data,key) => { text += possible.charAt(Math.floor(Math.random() * possible.length)); });
         return text;
     };
 getAll() {
-        const rules = this.sheet.cssRules || this.sheet.rules || [];
-        let results = {};
-        let resultsMap = {};
-
-        resultsMap = rules.map((data, key) => {
-            console.log(key);
-        })
-
-        // Browsers report selectors in lowercase
-        for (var i = 0; i < rules.length; i++) {
-            // FIXME: remove masterClass if fontface
-            const className =  rules[i].selectorText.replace(`${this.masterClass} `,'');
-            const cssText = rules[i].cssText.slice(rules[i].cssText.indexOf('{')+1);
-            const attrs = cssText.split(';');
-
-            let ruleSet = {};
-            for (var k = 0; k < attrs.length; ++k) {
-                var keyValue = attrs[k].split(':');
-                if (keyValue.length == 2) {
-                    var key = keyValue[0].trim();
-                    var value = keyValue[1].trim();
-                    ruleSet[key] = value;
+        const rules = this.sheet.cssRules || this.sheet.rules || {};
+        const results = {};
+        Object.keys(rules).map((key) => {
+            const className =   rules[key].selectorText.replace(`${this.masterClass} `,'');
+            const cssText =  rules[key].cssText.slice(rules[key].cssText.indexOf('{')+1).split(';');
+            const ruleSet = {}
+            cssText.map((data, key) => {
+                const keyValue = data.split(':');
+                if(keyValue.length === 2){
+                    ruleSet[keyValue[0].trim()] = keyValue[1].trim();
                 }
-            }
-            for (var testRule in ruleSet) {
-                // We are going to add the rule if it is not an empty object
-                results[className] = ruleSet;
-                break;
-            }
-        }
+            });
+            results[className] = ruleSet;
+        })
         return results;
     }
 
@@ -57,24 +42,32 @@ extend(selector){
 }
 
 add(selector, rules) {
-	if (this.sheet.insertRule) {
-        this.sheet.insertRule(`${this.masterClass} ${selector} { ${rules} }`, this.index);
-    } else {
-    this.sheet.addRule(`${this.masterClass} ${selector}`, rules, this.index);
-  }
+	
+this.sheet.insertRule ? this.sheet.insertRule(`${this.masterClass} ${selector} { ${rules} }`, this.index) : this.sheet.addRule(`${this.masterClass} ${selector}`, rules, this.index);
+
   this.index++;
 }
 
-// addFont(rules) {
-
-//     this.sheet.insertRule(`${rules}`, this.index);
-//     this.index++;
-// }
+addSpecial(rule) {
+    const id = this.specialId;
+    if (this.specialSheet === false) {
+        const styleNode = document.createElement('style');
+        styleNode.type = 'text/css';
+        styleNode.id = id;
+        styleNode.rel = 'stylesheet';
+        document.head.appendChild(styleNode);
+        this.specialSheet = document.getElementById(id);  //FIXME
+        this.specialSheet.innerHTML = rule;
+    } else {
+        console.log(this.specialSheet, );
+        this.specialSheet.innerHTML += "\n"+rule;
+    }
+}
 
 
 createScope(){
-    if(!this.sheet){
-    var styleNode = document.createElement('style');
+    if(this.sheet === false){
+    const styleNode = document.createElement('style');
     styleNode.type = 'text/css';
     styleNode.id = this.id;
     styleNode.rel = 'stylesheet';
@@ -86,9 +79,9 @@ createScope(){
         return this.id;
     }
     createGlobal(){
-    if(!this.sheet){
+    if(this.sheet === false){
         this.masterClass = " ";
-        var styleNode = document.createElement('style');
+        const styleNode = document.createElement('style');
         styleNode.type = 'text/css';
         styleNode.id = this.id;
         styleNode.rel = 'stylesheet';
@@ -99,3 +92,4 @@ createScope(){
         }
     }
  }
+export { Fairybread as default}
