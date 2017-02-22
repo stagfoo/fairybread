@@ -42,8 +42,8 @@ extend(selector){
 }
 
 add(selector, rules) {
-	
-this.sheet.insertRule ? this.sheet.insertRule(`${this.masterClass} ${selector} { ${rules} }`, this.index) : this.sheet.addRule(`${this.masterClass} ${selector}`, rules, this.index);
+    //FIXME: Create Object Here
+	this.sheet.insertRule ? this.sheet.insertRule(`${this.masterClass} ${selector} { ${rules} }`, this.index) : this.sheet.addRule(`${this.masterClass} ${selector}`, rules, this.index);
 
   this.index++;
 }
