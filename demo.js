@@ -1,4 +1,20 @@
 import Fairybread from './src/fairybread';
+const vars = {
+  colors: {
+    yellow: '#FFFFBE',
+    orange: '#F7CD99',
+    pink: '#FF77A1',
+    purple: '#9886E8',
+    blue: '#97CACB',
+
+  }
+}
+
+
+const globalSheet = new Fairybread();
+globalSheet.createGlobal();
+globalSheet.add('body',`background:${vars.colors.yellow}`)
+
 var sheet = new Fairybread();
 var id = sheet.createScope();
 // sheet.createGlobal();

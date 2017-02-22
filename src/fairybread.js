@@ -64,7 +64,7 @@ addSpecial(rule) {
         this.specialSheet.innerHTML = rule;
     } else {
         console.log(this.specialSheet, );
-        this.specialSheet.innerHTML += rule;
+        this.specialSheet.innerHTML += "\n"+rule;
     }
 }
 
