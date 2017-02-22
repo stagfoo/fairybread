@@ -4,12 +4,13 @@ class Fairybread {
  this.masterClass = `.${this.id}`;
  this.sheet = false;
  this.specialSheet = false;
+ this.specialId = this.makeId() + "_special";
  this.rules;
  this.index = 0;
  this.specialIndex = 0;
  this.global = false;
 
-}
+ }
 
 makeId(){
         var text = "fairybread_";
@@ -33,7 +34,7 @@ getAll() {
                 }
             });
             results[className] = ruleSet;
-        })  
+        })
         return results;
     }
 
@@ -52,20 +53,23 @@ add(selector, rules) {
 }
 
 addSpecial(rule) {
-    if(this.specialSheet === false){
+    const id = this.specialId;
+    if (this.specialSheet === false) {
         const styleNode = document.createElement('style');
         styleNode.type = 'text/css';
-        styleNode.id = this.makeId()+"_special";
+        styleNode.id = id;
         styleNode.rel = 'stylesheet';
         document.head.appendChild(styleNode);
         this.specialSheet = styleNode.sheet;
-        this.specialSheet.insertRule(`${rule}`, this.specialIndex);
+        this.specialSheet.insertRule(`[data-fb="${id}"] {}`, this.specialIndex);
+        document.getElementById(id).sheet.cssRules[this.specialIndex] = rule;
         this.specialIndex++;
     } else {
-        this.specialSheet.insertRule(`${rule}`, this.specialIndex);
+        console.log(id);
+        this.specialSheet.insertRule(`[data-fb="${id}"] {}`, this.specialIndex);
+        document.getElementById(id).sheet.cssRules[this.specialIndex] = rule;
         this.specialIndex++;
     }
-    console.log(this.specialSheet)
 }
 
 
@@ -96,3 +100,4 @@ createScope(){
         }
     }
  }
+export { Fairybread as default}
