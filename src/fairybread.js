@@ -60,15 +60,11 @@ addSpecial(rule) {
         styleNode.id = id;
         styleNode.rel = 'stylesheet';
         document.head.appendChild(styleNode);
-        this.specialSheet = styleNode.sheet;
-        this.specialSheet.insertRule(`[data-fb="${id}"] {}`, this.specialIndex);
-        document.getElementById(id).sheet.cssRules[this.specialIndex] = rule;
-        this.specialIndex++;
+        this.specialSheet = document.getElementById(id);  //FIXME
+        this.specialSheet.innerHTML = rule;
     } else {
-        console.log(id);
-        this.specialSheet.insertRule(`[data-fb="${id}"] {}`, this.specialIndex);
-        document.getElementById(id).sheet.cssRules[this.specialIndex] = rule;
-        this.specialIndex++;
+        console.log(this.specialSheet, );
+        this.specialSheet.innerHTML += rule;
     }
 }
 
