@@ -4,12 +4,15 @@ you have probaby all read [this talk](https://speakerdeck.com/vjeux/react-css-in
 
 this little 2.4kb libraries interacts with style tags on the page to help you create pretty shit.
 
+`npm install fairybread`
+
 ## Basic Setup
 ```
 const colors: {
     yellow: '#FFFFBE',
   }
 }
+import Fairybread from './dist/fairybread';
 const globalSheet = new Fairybread();
 globalSheet.createGlobal();
 globalSheet.add('body',
@@ -66,4 +69,4 @@ var tag_color = sheet.getAll()['a'];
 sheet.add ('.button', `color:${tag_color}`);
 ```
 
-Well now 
+Well now thats everything for now. Now your css is in js you have function and vars and all that goodness.
