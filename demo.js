@@ -17,9 +17,10 @@ globalSheet.add('body',`background:${vars.colors.yellow}`)
 
 var sheet = new Fairybread();
 var id = sheet.createScope();
-// sheet.createGlobal();
 
 sheet.add('a','color:red;');
+sheet.add('a','color:blue;');
+
 sheet.add('a:hover','color:green;');
 sheet.add('h1','font-family:"Permanent Marker"')
 sheet.add('p',`color:blue; font-family: 'Roboto';`);
@@ -45,8 +46,10 @@ sheet.addSpecial(`
   src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v15/ek4gzZ-GeXAPcSbHtCeQI_esZW2xOQ-xsNqO47m55DA.woff2) format('woff2');
   unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F;
 };`);
-console.log(sheet.extend('p'));
+console.log(globalSheet.extend('body'));
 console.log(sheet.getAll());
+var tag_color = sheet.getAll()['a'];
+sheet.add ('.button', `color:${tag_color}`);
 
 // console.log(id);
 document.querySelector('#main').className = id
