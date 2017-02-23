@@ -47,25 +47,6 @@ globalSheet.add('.fiddy',`
     float:left;
     margin:1em;
 `);
-globalSheet.add(`#buttons`,`
-  text-align:center;
-  margin-bottom:2em;
-  display:block;
-`)
-globalSheet.add(`#buttons a`,`
-    ${vars.rainbow};
-    display: inline-block;
-    padding: 15px 7px;
-    margin: 0px;
-    border-radius: 5px;
-    text-decoration:none;
-`)
-globalSheet.add(`#buttons span`,`
-    background:#fff;
-    padding: 10px;
-    margin: 0px;
-    color:#000;    
-`)
 var logo = new Fairybread();
 var logo_id = logo.createScope();
 logo.add('h1', `
