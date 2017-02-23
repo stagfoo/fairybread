@@ -69,6 +69,8 @@ globalSheet.add(`#buttons span`,`
 var logo = new Fairybread();
 var logo_id = logo.createScope();
 logo.add('h1', `
+text-align:center;
+width:100%;
   ${vars.rainbow};
   font-size:12em;
   font-family: "Sacramento";

@@ -165,7 +165,7 @@ globalSheet.add('#buttons a', '\n    ' + vars.rainbow + ';\n    display: inline-
 globalSheet.add('#buttons span', '\n    background:#fff;\n    padding: 10px;\n    margin: 0px;\n    color:#000;    \n');
 var logo = new _fairybread2.default();
 var logo_id = logo.createScope();
-logo.add('h1', '\n  ' + vars.rainbow + ';\n  font-size:12em;\n  font-family: "Sacramento";\n  overflow: visible;\n  font-weight:100;\n  padding:0em;\n  margin:0em;\n  display:inline-block;\n  -webkit-text-fill-color: transparent;\n  -webkit-background-clip: text;\n ');
+logo.add('h1', '\ntext-align:center;\nwidth:100%;\n  ' + vars.rainbow + ';\n  font-size:12em;\n  font-family: "Sacramento";\n  overflow: visible;\n  font-weight:100;\n  padding:0em;\n  margin:0em;\n  display:inline-block;\n  -webkit-text-fill-color: transparent;\n  -webkit-background-clip: text;\n ');
 document.querySelector('[data-id="header"]').classList += ' ' + logo_id;
 
 var card = new _fairybread2.default();
