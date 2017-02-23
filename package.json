@@ -1,13 +1,13 @@
 {
   "name": "fairybread",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "a js utility to manage css and replace sass",
   "main": "dist/fairybread.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-demo": "webpack",
     "build": "babel ./src/fairybread.js --out-file ./dist/fairybread.js",
-    "dev": "webpack-dev-server --content-base ./dist"
+    "dev": "webpack-dev-server --content-base ./docs"
   },
   "repository": {
     "type": "git",
