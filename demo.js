@@ -10,46 +10,42 @@ const vars = {
   }
 }
 
-
 const globalSheet = new Fairybread();
 globalSheet.createGlobal();
-globalSheet.add('body',`background:${vars.colors.yellow}`)
+globalSheet.add('body',`
+  background:${vars.colors.pink};
+  padding:4em;
+  `);
 
-var sheet = new Fairybread();
-var id = sheet.createScope();
+var local = new Fairybread();
+var id = local.createScope();
+local.add('h1', `
+        font-family:"Permanent Marker";
+        font-size:9em;
+        color: ${vars.colors.yellow};
+        margin:0px;
+        padding:0px;
+        text-shadow:5px 5px 0px ${vars.colors.orange}
 
-sheet.add('a','color:red;');
-sheet.add('a','color:blue;');
+        `);
 
-sheet.add('a:hover','color:green;');
-sheet.add('h1','font-family:"Permanent Marker"')
-sheet.add('p',`color:blue; font-family: 'Roboto';`);
-sheet.add('#main',`
+local.add('p',`
+            font-family: 'Pangolin';
+            font-size:1.7em;
+            line-height:1.4em;
+            color:${vars.colors.yellow};
+            font-weight:300;
+            letter-spacing:1px;
+          `);
+local.add('#main',`
               background:#efefef;
               font-weight:bold;
               width:900px;
               margin:0 auto;
               padding:1em;
               `);
-sheet.addSpecial(` @font-face {
-    font-family: 'Permanent Marker';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Permanent Marker'), local('PermanentMarker'), url(https://fonts.gstatic.com/s/permanentmarker/v5/9vYsg5VgPHKK8SXYbf3sMio-5Z6V1O0VBgfXWFfbB4c.woff2) format('woff2');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
-};`);
-sheet.addSpecial(`
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v15/ek4gzZ-GeXAPcSbHtCeQI_esZW2xOQ-xsNqO47m55DA.woff2) format('woff2');
-  unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F;
-};`);
-console.log(globalSheet.extend('body'));
-console.log(sheet.getAll());
-var tag_color = sheet.getAll()['a'];
-sheet.add ('.button', `color:${tag_color}`);
+local.addSpecial(`@import url('https://fonts.googleapis.com/css?family=Permanent+Marker|Pangolin');`);
+
 
 // console.log(id);
 document.querySelector('#main').className = id
