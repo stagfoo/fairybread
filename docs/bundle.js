@@ -141,38 +141,45 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var vars = {
   colors: {
+    white: '#ffffff',
     yellow: '#FFFFBE',
     orange: '#F7CD99',
-    pink: '#FF77A1',
-    purple: '#9886E8',
-    blue: '#97CACB'
-
-  }
+    pink: '#ff9cc8',
+    purple: '#4b007d',
+    blue: 'blue',
+    bread: 'rgb(255, 243, 189)',
+    crust: '#ffb903'
+  },
+  'rainbow': '  background-size:100%;\n  background: #f15a5a; /* Old browsers */\n  background: -moz-linear-gradient(left, #f15a5a 0%, #f0c419 22%, #4eba6f 45%, #2d95bf 70%, #955ba5 100%); /* FF3.6-15 */\n  background: -webkit-linear-gradient(left, #f15a5a 0%,#f0c419 22%,#4eba6f 45%,#2d95bf 70%,#955ba5 100%); /* Chrome10-25,Safari5.1-6 */\n  background: linear-gradient(to right, #f15a5a 0%,#f0c419 22%,#4eba6f 45%,#2d95bf 70%,#955ba5 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#f15a5a\', endColorstr=\'#955ba5\',GradientType=1 ); /* IE6-9 */\n  '
 };
 
 var globalSheet = new _fairybread2.default();
+globalSheet.addSpecial('@import url(\'https://fonts.googleapis.com/css?family=Sacramento|Raleway\');');
 globalSheet.createGlobal();
-globalSheet.add('body', 'background:' + vars.colors.yellow);
+globalSheet.add('body', '\n  background-size:7em;\n  font-family:Arial,sans-serf;\n  ');
+globalSheet.add('p', '\n            line-height:1.4em;\n            color:' + vars.colors.black + ';\n            font-weight:100;\n            letter-spacing:1px;\n            font-size: 15px;\n            text-align: left\n          ');
+globalSheet.add('#main', '\n              font-weight:bold;\n              width:70vw;\n              margin:0 auto;\n              padding:1em;\n              ');
+globalSheet.add('.fiddy', '\n    display:inline-block;\n    max-width:30vw;\n    overflow:hidden;\n    float:left;\n    margin:1em;\n');
+globalSheet.add('#buttons', '\n  text-align:center;\n  margin-bottom:2em;\n  display:block;\n');
+globalSheet.add('#buttons a', '\n    ' + vars.rainbow + ';\n    display: inline-block;\n    padding: 15px 7px;\n    margin: 0px;\n    border-radius: 5px;\n    text-decoration:none;\n');
+globalSheet.add('#buttons span', '\n    background:#fff;\n    padding: 10px;\n    margin: 0px;\n    color:#000;    \n');
+var logo = new _fairybread2.default();
+var logo_id = logo.createScope();
+logo.add('h1', '\n  ' + vars.rainbow + ';\n  font-size:12em;\n  font-family: "Sacramento";\n  overflow: visible;\n  font-weight:100;\n  padding:0em;\n  margin:0em;\n  display:inline-block;\n  -webkit-text-fill-color: transparent;\n  -webkit-background-clip: text;\n ');
+document.querySelector('[data-id="header"]').classList += ' ' + logo_id;
 
-var sheet = new _fairybread2.default();
-var id = sheet.createScope();
-
-sheet.add('a', 'color:red;');
-sheet.add('a', 'color:blue;');
-
-sheet.add('a:hover', 'color:green;');
-sheet.add('h1', 'font-family:"Permanent Marker"');
-sheet.add('p', 'color:blue; font-family: \'Roboto\';');
-sheet.add('#main', '\n              background:#efefef;\n              font-weight:bold;\n              width:900px;\n              margin:0 auto;\n              padding:1em;\n              ');
-sheet.addSpecial(' @font-face {\n    font-family: \'Permanent Marker\';\n    font-style: normal;\n    font-weight: 400;\n    src: local(\'Permanent Marker\'), local(\'PermanentMarker\'), url(https://fonts.gstatic.com/s/permanentmarker/v5/9vYsg5VgPHKK8SXYbf3sMio-5Z6V1O0VBgfXWFfbB4c.woff2) format(\'woff2\');\n    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;\n};');
-sheet.addSpecial('\n@font-face {\n  font-family: \'Roboto\';\n  font-style: normal;\n  font-weight: 400;\n  src: local(\'Roboto\'), local(\'Roboto-Regular\'), url(https://fonts.gstatic.com/s/roboto/v15/ek4gzZ-GeXAPcSbHtCeQI_esZW2xOQ-xsNqO47m55DA.woff2) format(\'woff2\');\n  unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F;\n};');
-console.log(globalSheet.extend('body'));
-console.log(sheet.getAll());
-var tag_color = sheet.getAll()['a'];
-sheet.add('.button', 'color:' + tag_color);
+var card = new _fairybread2.default();
+var card_id = card.createScope();
+card.add('', '\n    box-shadow:0px 0px 5px rgba(0,0,0,0.5);\n    font-family:Raleway;\n');
+card.add('.color-wrapper', '\n    padding:0.3em;\n    overflow:hidden;\n    ' + vars.rainbow + ';  \n    margin:1em;\n');
+card.add('img', 'width:100%;');
+card.add('h1', 'padding:0px 10px;  margin:0px;');
+card.add('p', 'color:grey; padding:10px;');
+card.add('a', 'color:grey; padding:1em; width:100%; background:#efefef; display:block; text-decoration:none;');
+card.add('a:hover', 'background:' + vars.colors.yellow + '; color:' + vars.colors.orange);
+document.querySelector('[data-id="card1"]').classList += ' ' + card_id;
 
 // console.log(id);
-document.querySelector('#main').className = id;
 
 /***/ })
 /******/ ]);
