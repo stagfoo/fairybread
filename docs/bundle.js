@@ -130,9 +130,6 @@ function _toConsumableArray(a) {
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
 var _fairybread = __webpack_require__(0);
 
 var _fairybread2 = _interopRequireDefault(_fairybread);
