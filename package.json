@@ -34,5 +34,8 @@
     "uglifyjs-webpack-plugin": "^0.2.1",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.1"
+  },
+  "dependencies": {
+    "unfetch": "^1.0.1"
   }
 }
