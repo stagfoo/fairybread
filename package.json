@@ -1,6 +1,6 @@
 {
   "name": "fairybread",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "a js utility to manage css and replace sass",
   "main": "dist/fairybread.min.js",
   "scripts": {
