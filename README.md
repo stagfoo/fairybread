@@ -10,23 +10,26 @@ npm install fairybread
 
 ## Basic Setup
 ```js
-const colors: {
+var colors = {
     yellow: '#FFFFBE',
-  }
-}
-import Fairybread from './dist/fairybread';
-const globalSheet = new Fairybread();
+    pink: 'salmon',
+
+};
+var globalSheet = new Fairybread();
 globalSheet.createGlobal();
-globalSheet.add('body',
-                `background:${colors.yellow}`
-                );
+globalSheet.add('body',`background:${colors.yellow}` );
+globalSheet.add('h1',`color:${colors.pink}` );
 ```
+[Demo](http://codepen.io/stagfoo/pen/wJzOGW)
 
 output in head
 ```html
-<style id="fairybread_xjRSIWrtA3kBepAHLZsM">
+<style id="fairybread_208X7mLD6jwR4LCgOzod">
     body {
         background: #FFFFBE;
+    }
+    h1 {
+        color:salmon
     }
 </style>
 ```
@@ -36,8 +39,9 @@ As you may have guested `.createGlobal` create a global style globalSheet that w
 ```js
 var sheet = new Fairybread();
 var id = sheet.createScope();
-sheet.add('a','color:red;'); 
+sheet.add('a','color:red;');
 ```
+[Demo](http://codepen.io/stagfoo/pen/evdXdM)
 output in head
 ```html
 <style id="fairybread_xjRSIWrtA3kBepAHLZsM">
@@ -66,7 +70,7 @@ Its global because most this like font-face and keyframe can't be scoped. this s
 ```js
 var tag_color = sheet.extend('a').color;
 sheet.add ('.button', `color:${tag_color}`);
-// OR 
+// OR
 var tag_color = sheet.getAll()['a'];
 sheet.add ('.button', `color:${tag_color}`);
 ```
