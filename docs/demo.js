@@ -47,6 +47,25 @@ globalSheet.add('.fiddy',`
     float:left;
     margin:1em;
 `);
+globalSheet.add(`#buttons`,`
+  text-align:center;
+  margin-bottom:2em;
+  display:block;
+`)
+globalSheet.add(`#buttons a`,`
+    ${vars.rainbow};
+    display: inline-block;
+    padding: 15px 7px;
+    margin: 0px;
+    border-radius: 5px;
+    text-decoration:none;
+`)
+globalSheet.add(`#buttons span`,`
+    background:#fff;
+    padding: 10px;
+    margin: 0px;
+    color:#000;
+`)
 var logo = new Fairybread();
 var logo_id = logo.createScope();
 logo.add('h1', `
@@ -62,7 +81,7 @@ logo.add('h1', `
   -webkit-background-clip: text;
  `);
 document.querySelector('[data-id="header"]').classList += ' '+logo_id;
- 
+
 var card = new Fairybread();
 var card_id = card.createScope();
 card.add('',`
@@ -72,7 +91,7 @@ card.add('',`
 card.add('.color-wrapper',`
     padding:0.3em;
     overflow:hidden;
-    ${vars.rainbow};  
+    ${vars.rainbow};
     margin:1em;
 `)
 card.add('img',`width:100%;`)
