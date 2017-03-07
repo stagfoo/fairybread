@@ -59,7 +59,6 @@ addSpecial(rule) {
         this.specialSheet = document.getElementById(id);  //FIXME
         this.specialSheet.innerHTML = rule;
     } else {
-        console.log(this.specialSheet, );
         this.specialSheet.innerHTML += "\n"+rule;
     }
 }
@@ -91,5 +90,10 @@ createScope(){
         console.error('You have already made a sheet on this instance')
         }
     }
- }
-export { Fairybread as default}
+}
+
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    module.exports = Fairybread;
+  } else {
+    window.Fairybread = Fairybread;
+}

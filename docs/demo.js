@@ -1,4 +1,5 @@
 import Fairybread from './dist/fairybread';
+window.onload = function () {
 const vars = {
   colors: {
     white: '#ffffff',
@@ -18,7 +19,6 @@ const vars = {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f15a5a', endColorstr='#955ba5',GradientType=1 ); /* IE6-9 */
   `
 }
-
 const globalSheet = new Fairybread();
 globalSheet.addSpecial(`@import url('https://fonts.googleapis.com/css?family=Sacramento|Raleway');`);
 globalSheet.createGlobal();
@@ -47,11 +47,33 @@ globalSheet.add('.fiddy',`
     float:left;
     margin:1em;
 `);
+globalSheet.add(`#buttons`,`
+  text-align:center;
+  margin-bottom:2em;
+  display:block;
+`)
+globalSheet.add(`#buttons a`,`
+    ${vars.rainbow};
+    display: inline-block;
+    padding: 15px 7px;
+    margin: 0px;
+    border-radius: 5px;
+    text-decoration:none;
+`)
+globalSheet.add(`#buttons span`,`
+    background:#fff;
+    padding: 10px;
+    margin: 0px;
+    color:#000;
+`)
 var logo = new Fairybread();
-var logo_id = logo.createScope();
-document.querySelector('header').classList += ' '+logo_id;
+  var logo_id = logo.createScope();
+  document.getElementById('header').className = logo_id;
+// document.getElementById('header').classList += ' '+logo_id;
 
 logo.add('h1', `
+text-align:center;
+width:100%;
   ${vars.rainbow};
   font-size:12em;
   font-family: "Sacramento";
@@ -63,10 +85,9 @@ logo.add('h1', `
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
  `);
-
 var card = new Fairybread();
 var card_id = card.createScope();
-document.getElementById('card1').classList += ' '+card_id;
+document.getElementById('card1').className = 'fiddy '+card_id;
 
 card.add('',`
     box-shadow:0px 0px 5px rgba(0,0,0,0.5);
@@ -84,7 +105,6 @@ card.add('p',`color:grey; padding:10px;`)
 card.add('a',`color:grey; padding:1em; width:100%; background:#efefef; display:block; text-decoration:none;`)
 card.add('a:hover',`background:${vars.colors.yellow}; color:${vars.colors.orange}`)
 
-
-
+};
 
 // console.log(id);

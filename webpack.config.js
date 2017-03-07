@@ -5,7 +5,9 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
   context: path.resolve(__dirname, './'),
   entry: {
-    app: './demo.js',
+    'fairybread': './src/fairybread.js',
+    'fairybread.min': './src/fairybread.js',
+
   },
   module: {
   loaders: [
@@ -20,10 +22,10 @@ module.exports = {
   ]
  },
   output: {
-    path: path.resolve(__dirname, 'docs'),
-    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js',
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin()
+    new webpack.optimize.UglifyJsPlugin({ compress: { drop_console: true } } )
   ]
 };
