@@ -1,6 +1,4 @@
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -81,7 +79,6 @@ var Fairybread = function () {
                 this.specialSheet = document.getElementById(id); //FIXME
                 this.specialSheet.innerHTML = rule;
             } else {
-                console.log(this.specialSheet);
                 this.specialSheet.innerHTML += "\n" + rule;
             }
         }
@@ -120,4 +117,8 @@ var Fairybread = function () {
     return Fairybread;
 }();
 
-exports.default = Fairybread;
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    module.exports = Fairybread;
+} else {
+    window.Fairybread = Fairybread;
+}
