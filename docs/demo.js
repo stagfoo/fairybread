@@ -1,4 +1,4 @@
-import Fairybread from './dist/fairybread';
+import Fairybread from './src/fairybread';
 window.onload = function () {
 const vars = {
   colors: {
