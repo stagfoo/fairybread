@@ -29,7 +29,7 @@ output in head
         background: #FFFFBE;
     }
     h1 {
-        color:salmon
+        color:salmon;
     }
 </style>
 ```
