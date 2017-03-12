@@ -1,1 +1,88 @@
-"use strict";function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,s=Array(e.length);t<e.length;t++)s[t]=e[t];return s}return Array.from(e)}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var _createClass=function(){function e(e,t){for(var s=0;s<t.length;s++){var a=t[s];a.enumerable=a.enumerable||!1,a.configurable=!0,"value"in a&&(a.writable=!0),Object.defineProperty(e,a.key,a)}}return function(t,s,a){return s&&e(t.prototype,s),a&&e(t,a),t}}(),Fairybread=function(){function e(){_classCallCheck(this,e),this.id=this.makeId(),this.masterClass="."+this.id,this.sheet=!1,this.specialSheet=!1,this.specialId=this.makeId()+"_special",this.rules,this.index=0,this.specialIndex=0,this.global=!1}return _createClass(e,[{key:"makeId",value:function(){var e="fairybread_",t="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";return[].concat(_toConsumableArray(Array(20))).map(function(s,a){e+=t.charAt(Math.floor(Math.random()*t.length))}),e}},{key:"getAll",value:function(){var e=this,t=this.sheet.cssRules||this.sheet.rules||{},s={};return Object.keys(t).map(function(a){var i=t[a].selectorText.replace(e.masterClass+" ",""),r=t[a].cssText.slice(t[a].cssText.indexOf("{")+1).split(";"),n={};r.map(function(e,t){var s=e.split(":");2===s.length&&(n[s[0].trim()]=s[1].trim())}),s[i]=n}),s}},{key:"extend",value:function(e){var t=this.getAll();return t[e]}},{key:"add",value:function(e,t){this.sheet.insertRule?this.sheet.insertRule(this.masterClass+" "+e+" { "+t+" }",this.index):this.sheet.addRule(this.masterClass+" "+e,t,this.index),this.index++}},{key:"addSpecial",value:function(e){var t=this.specialId;if(this.specialSheet===!1){var s=document.createElement("style");s.type="text/css",s.id=t,s.rel="stylesheet",document.head.appendChild(s),this.specialSheet=document.getElementById(t),this.specialSheet.innerHTML=e}else this.specialSheet.innerHTML+="\n"+e}},{key:"createScope",value:function(){if(this.sheet===!1){var e=document.createElement("style");e.type="text/css",e.id=this.id,e.rel="stylesheet",document.head.appendChild(e),this.sheet=e.sheet}else console.error("You have already made a sheet on this instance");return this.id}},{key:"createGlobal",value:function(){if(this.sheet===!1){this.masterClass=" ";var e=document.createElement("style");e.type="text/css",e.id=this.id,e.rel="stylesheet",document.head.appendChild(e),this.sheet=e.sheet}else console.error("You have already made a sheet on this instance")}}]),e}();"undefined"!=typeof module&&"undefined"!=typeof module.exports?module.exports=Fairybread:window.Fairybread=Fairybread;
+function Fairybread(sheetType) {
+    this.sheetType = sheetType;
+    this.scopeClass = '';
+    // Create Id
+    function makeId() {
+        var text = "fairybread_";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        var array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+        array.map(function (data, key) { text += possible.charAt(Math.floor(Math.random() * possible.length)); });
+        return text;
+    };
+    // Uniquish Id
+    this.id = makeId();
+    // Create Sheetsheet
+    function createSheet(id) {
+        var styleNode = document.createElement('style');
+        styleNode.type = 'text/css';
+        styleNode.id = id;
+        styleNode.rel = 'stylesheet';
+        // required for sheet attr to be created
+        document.body.appendChild(styleNode);
+        return styleNode.sheet;
+    }
+    // Create Js Object from Css text
+    this.cssToJs = function (css) {
+        var rules = css.split(';');
+        var ruleSet = {}
+        rules.map(function (data, key) {
+            var keyValue = data.split(':');
+            if (keyValue.length === 2) {
+                ruleSet[keyValue[0].trim().toString()] = keyValue[1].trim();
+            }
+        });
+        return ruleSet;
+    }
+
+    this.sheet = createSheet(this.id);
+    this.specialSheet = false;
+    this.specialId = makeId() + "_special";
+    this.rendered = false;
+    this.rules = [];
+    this.index = 0;
+    this.specialIndex = 0;
+
+}
+
+Fairybread.prototype.getAll = function () { return this.rules; }
+//Extend any rule to use in another css object
+Fairybread.prototype.extend = function (selector) { return this.rules[selector]; }
+Fairybread.prototype.add = function (selector, rules) {
+    //Create Css Objects
+    if (this.rules[selector.toString()] === undefined) {
+        this.rules[selector.toString()] = this.cssToJs(rules); //Fixme add index to rule object for deleting;
+        //Create Css Rules
+        if (this.sheetType != 'global') {
+            this.scopeClass = "." + this.id.toString();
+        }
+        if (this.sheet.insertRule) {
+            this.sheet.insertRule(this.scopeClass + " " + selector + " {" + rules + "}", this.index)
+        } else {
+            this.sheet.addRule(this.scopeClass + " " + selector, rules, this.index);
+        }
+        this.index++;
+    } else {
+        console.error(selector + " is ready in this style sheet");
+    }
+}
+
+Fairybread.prototype.addSpecial = function (rule) {
+    var id = this.specialId;
+    if (this.specialSheet === false) {
+        var styleNode = document.createElement('style');
+        styleNode.type = 'text/css';
+        styleNode.id = id;
+        styleNode.rel = 'stylesheet';
+        document.body.appendChild(styleNode);
+        this.specialSheet = document.getElementById(id);  //FIXME
+        this.specialSheet.innerHTML = rule;
+    } else {
+        this.specialSheet.innerHTML += "\n" + rule;
+    }
+}
+
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    module.exports = Fairybread;
+} else {
+    window.Fairybread = Fairybread;
+}
