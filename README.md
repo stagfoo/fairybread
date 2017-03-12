@@ -21,7 +21,7 @@ globalSheet.add('h1',`color:${colors.pink}` );
 ```
 [Demo](http://codepen.io/stagfoo/pen/xqdWKE)
 
-output in head
+Outputs
 ```html
 <style id="fairybread_208X7mLD6jwR4LCgOzod">
     body { background: #FFFFBE; }
@@ -36,7 +36,8 @@ var sheet = new Fairybread();
 sheet.add('a','color:red;');
 ```
 [Demo](http://codepen.io/stagfoo/pen/qrmoEr)
-output in head
+
+outputs
 ```html
 <style id="fairybread_xjRSIWrtA3kBepAHLZsM">
     .fairybread_xjRSIWrtA3kBepAHLZsM a {
@@ -44,10 +45,10 @@ output in head
     }
 </style>
 ```
-`sheet.id` is the scoping class that you can attached appropriately for example at the top of a component.
+`sheet.id` is the scoping class (excluding the .) that you can attached appropriately for example at the top of a component.
 
 ## Specials
-now I know all you designer types love the fonts and keyframes so you can add these as well.
+Now I know all you designer types love the fonts and keyframes so you can add these as well.
 ```js
 sheet.addSpecial(`
   @import url('https://fonts.googleapis.com/css?family=Sacramento');
@@ -63,10 +64,12 @@ sheet.addSpecial(`
   }
 ```
 [Demo](http://codepen.io/stagfoo/pen/vxmROp)
+
 `.addSpecial` lets you paste any full css into the special style sheet.
-Its global because most likely used for font-face and keyframe, which can't be scoped. this should also help you fix any style syntax not supported yet.
+Its global in its own sheet because its designed for font-face and keyframes, which can't be scoped. this should also help you fix any style syntax not supported yet by fairybread.
 
 ## Extend
+Pretty much just object syntax from javascript
 ```js
 var tag_color = sheet.extend('a').color;
 sheet.add ('.button', `color:${tag_color}`);
@@ -74,5 +77,4 @@ sheet.add ('.button', `color:${tag_color}`);
 var tag_color = sheet.getAll()['a'];
 sheet.add ('.button', `color:${tag_color}`);
 ```
-m
-Well now thats everything for now. Now your css is in js you have function and vars and all that goodness.
+Well now that's everything for now. Now your css is in js you have function and vars and all that goodness.

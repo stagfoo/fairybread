@@ -41,7 +41,7 @@
     <p></p>
     <!--<script src="bundle.js"></script>-->
     <!--<script src="/dist/fairybread.min.js"></script>-->
-    <script src="../dist/fairybread.min.js"></script>
+    <script src="../src/fairybread.js"></script>
     <script>
         var vars = {
             colors: {
@@ -63,8 +63,12 @@
     `
         }
         const globalSheet = new Fairybread('global');
-        globalSheet.addSpecial(`@import url('https://fonts.googleapis.com/css?family=Sacramento|Raleway');`);
+        globalSheet.addSpecial(`@import url('https://fonts.googleapis.com/css?family=Sacramento');`);
         globalSheet.add('body', `
+    background-size:7em;
+    font-family:Arial,sans-serf;
+    `);
+    globalSheet.add('body', `
     background-size:7em;
     font-family:Arial,sans-serf;
     `);
