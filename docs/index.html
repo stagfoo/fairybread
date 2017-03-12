@@ -6,7 +6,7 @@
 
 <body class="">
     <div id="main">
-        <header data-id="header">
+        <header id="header">
             <h1>Fairybread</h1>
         </header>
         <p>Fairybread is a javascript utility to manage css styles and replace precompilers. you have probaby all read <a href="https://speakerdeck.com/vjeux/react-css-in-js" >this talk</a> and you have probablly all had issues with libraries that have local binds not building. this little 2.4kb libraries interacts with style tags on the page to help you create pretty shit.
@@ -63,12 +63,8 @@
     `
         }
         const globalSheet = new Fairybread('global');
-        globalSheet.addSpecial(`@import url('https://fonts.googleapis.com/css?family=Sacramento');`);
+        globalSheet.addSpecial(`@import url('https://fonts.googleapis.com/css?family=Sacramento|Raleway');`);
         globalSheet.add('body', `
-    background-size:7em;
-    font-family:Arial,sans-serf;
-    `);
-    globalSheet.add('body', `
     background-size:7em;
     font-family:Arial,sans-serf;
     `);
@@ -128,7 +124,7 @@
             -webkit-background-clip: text;
             margin:0;
             `);
-        document.querySelector('[data-id="header"]').classList += ' ' + logo_id;
+        document.getElementById('header').classList += ' ' + logo_id;
 
         var card = new Fairybread();
         var card_id = card.id;
@@ -147,7 +143,7 @@
         card.add('p', `color:grey; padding:10px;`)
         card.add('a', `color:grey; padding:1em; width:100%; background:#efefef; display:block; text-decoration:none;`)
         card.add('a:hover', `background:${vars.colors.yellow}; color:${vars.colors.orange}`)
-        document.querySelector('[data-id="card1"]').classList += ' ' + card_id;
+        document.getElementById('card1').classList += ' ' + card_id;
     </script>
 
 </script>
