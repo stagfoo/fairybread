@@ -69,7 +69,7 @@ Fairybread.prototype.addSpecial  = function(rule){
         styleNode.type = 'text/css';
         styleNode.id = id;
         styleNode.rel = 'stylesheet';
-        document.head.appendChild(styleNode);
+        document.body.appendChild(styleNode);
         this.specialSheet = document.getElementById(id);  //FIXME
         this.specialSheet.innerHTML = rule;
     } else {

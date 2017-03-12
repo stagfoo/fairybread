@@ -5,43 +5,37 @@ you have probaby all read [this talk](https://speakerdeck.com/vjeux/react-css-in
 this little 2.4kb libraries interacts with style tags on the page to help you create pretty shit.
 
 ```
-npm install fairybread
+npm install fairybread --save
 ```
 
 ## Basic Setup
 ```js
 var colors = {
     yellow: '#FFFFBE',
-    pink: 'salmon',
+    pink: '#febfe2',
 
 };
-var globalSheet = new Fairybread();
-globalSheet.createGlobal();
+var globalSheet = new Fairybread('global');
 globalSheet.add('body',`background:${colors.yellow}` );
 globalSheet.add('h1',`color:${colors.pink}` );
 ```
-[Demo](http://codepen.io/stagfoo/pen/wJzOGW)
+[Demo](http://codepen.io/stagfoo/pen/xqdWKE)
 
 output in head
 ```html
 <style id="fairybread_208X7mLD6jwR4LCgOzod">
-    body {
-        background: #FFFFBE;
-    }
-    h1 {
-        color:salmon
-    }
+    body { background: #FFFFBE; }
+    h1 { color:#febfe2; }
 </style>
 ```
-As you may have guested `.createGlobal` create a global style globalSheet that will effect everything on the page (Ahh so scary!)
+As you may have guested passing "global" at creation will make a global stylesheet that will effect everything on the page (Ahh so scary!)
 
 ## Scoped Styles
 ```js
 var sheet = new Fairybread();
-var id = sheet.createScope();
 sheet.add('a','color:red;');
 ```
-[Demo](http://codepen.io/stagfoo/pen/evdXdM)
+[Demo](http://codepen.io/stagfoo/pen/qrmoEr)
 output in head
 ```html
 <style id="fairybread_xjRSIWrtA3kBepAHLZsM">
@@ -50,21 +44,27 @@ output in head
     }
 </style>
 ```
-`var id` is the class that you can stick appropriately for example at the top of a card or navbar.
+`sheet.id` is the scoping class that you can attached appropriately for example at the top of a component.
 
 ## Specials
-now i know all you designer types love the fonts and keyframes so you can add these as well.
+now I know all you designer types love the fonts and keyframes so you can add these as well.
 ```js
-sheet.addSpecial(` @font-face {
-    font-family: 'Permanent Marker';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Permanent Marker'), local('PermanentMarker'), url(https://fonts.gstatic.com/s/permanentmarker/v5/9vYsg5VgPHKK8SXYbf3sMio-5Z6V1O0VBgfXWFfbB4c.woff2) format('woff2');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
-};`);
+sheet.addSpecial(`
+  @import url('https://fonts.googleapis.com/css?family=Sacramento');
+`);
+sheet.addSpecial(`
+  @keyframes fairyfade {
+      0%   { color:#f15a5a }
+      22%   { color:#f0c419 }
+      45%   { color:#4eba6f }
+      70%   { color:#2d95bf }
+      90%   { color:#955ba5 }
+      100%   { color:#f15a5a }
+  }
 ```
-`.addSpecial` lets you paste any css into the special style sheet.
-Its global because most this like font-face and keyframe can't be scoped. this should also help you fix any styles not supported.
+[Demo](http://codepen.io/stagfoo/pen/vxmROp)
+`.addSpecial` lets you paste any full css into the special style sheet.
+Its global because most likely used for font-face and keyframe, which can't be scoped. this should also help you fix any style syntax not supported yet.
 
 ## Extend
 ```js
@@ -74,5 +74,5 @@ sheet.add ('.button', `color:${tag_color}`);
 var tag_color = sheet.getAll()['a'];
 sheet.add ('.button', `color:${tag_color}`);
 ```
-
+m
 Well now thats everything for now. Now your css is in js you have function and vars and all that goodness.
