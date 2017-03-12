@@ -2,7 +2,7 @@
 is a javascript utility to manage css styles and replace precompilers.
 you have probaby all read [this talk](https://speakerdeck.com/vjeux/react-css-in-js) and you have probablly all had issues with libraries that have local binds not building.
 
-this little 2.4kb libraries interacts with style tags on the page to help you create pretty shit.
+this little 1.38kb library interacts with style tags on the page to help you create pretty shit.
 
 ```
 npm install fairybread --save
