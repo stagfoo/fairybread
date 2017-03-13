@@ -5,9 +5,7 @@ you have probaby all read [this talk](https://speakerdeck.com/vjeux/react-css-in
 
 this little 1.38kb library interacts with style tags on the page to help you create pretty shit.
 
-```
-npm install fairybread --save
-```
+[![NPM](https://nodei.co/npm/fairybread.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/fairybread/)
 
 ## Basic Setup
 ```js
