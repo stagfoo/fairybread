@@ -5,7 +5,7 @@ function Fairybread(sheetType) {
     function makeId() {
         var text = "fairybread_";
         var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        var array = new Array(20);
+        var array = [1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9];
         array.map(function (data, key) { text += possible.charAt(Math.floor(Math.random() * possible.length)); });
         return text;
     };
@@ -43,18 +43,7 @@ function Fairybread(sheetType) {
     this.rules = {};
     this.index = 0;
     this.specialIndex = 0;
-    function renderRule(selector, rules) {
-        //Create Css Rules
-        if (this.sheetType != 'global') {
-            this.scopeClass = "." + this.id.toString();
-        }
-        if (this.sheet.insertRule) {
-            this.sheet.insertRule(this.scopeClass + " " + selector + " {" + rules + "}", this.index)
-        } else {
-            this.sheet.addRule(this.scopeClass + " " + selector, rules, this.index);
-        }
-        this.index++;
-    }
+
 }
 
 Fairybread.prototype.getAll = function () { return this.rules; }
@@ -62,6 +51,9 @@ Fairybread.prototype.getAll = function () { return this.rules; }
 Fairybread.prototype.extend = function (selector) { return this.rules[selector]; }
 
 Fairybread.prototype.add = function (selector, rules) {
+    if (this.sheetType != 'global') {
+            this.scopeClass = "." + this.id;
+    }
     //Create Css Objects
     if (this.rules[selector.toString()] === undefined) {
         this.rules[selector.toString()] = {
@@ -85,7 +77,7 @@ Fairybread.prototype.render = function (location) {
             bindSheet(thisSheet, location);
             let echoSheet = "";
             rulesRef.map(function (key) {
-                echoSheet += `${scopeClass} ${key} { ${sheetRules[key].css}  }`
+                echoSheet += ` ${scopeClass} ${key}{${sheetRules[key].css}}`
             });
             echoSheet = echoSheet.replace(/(\r\n|\n|\r)/gm, "").trim();
             thisSheet.innerHTML = echoSheet;
@@ -111,6 +103,7 @@ Fairybread.prototype.render = function (location) {
             renderFlat('body');
         break;
         default:
+            renderFlat('body');
             break;
     }
     return result;
