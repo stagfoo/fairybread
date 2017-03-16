@@ -5,7 +5,7 @@ function Fairybread(sheetType) {
     function makeId() {
         var text = "fairybread_";
         var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        var array = new Array(20);
+        var array = Array.apply(null, Array(20)); 
         array.map(function (data, key) { text += possible.charAt(Math.floor(Math.random() * possible.length)); });
         return text;
     };
