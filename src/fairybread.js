@@ -72,7 +72,7 @@ Fairybread.prototype.render = function (location) {
     const bindSheet = this.bindSheet;
     const scopeClass = this.scopeClass;
     const rulesRef = Object.keys(sheetRules);
-    //Genereate a plain text style sheet
+    //Generate a plain text style sheet
     function renderFlat(location) {
             bindSheet(thisSheet, location);
             let echoSheet = "";
