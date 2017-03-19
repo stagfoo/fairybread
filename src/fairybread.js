@@ -66,30 +66,25 @@ Fairybread.prototype.add = function (selector, rules) {
     }
 }
 Fairybread.prototype.render = function (location) {
-    let result;
-    const sheetRules = this.rules;
-    const thisSheet = this.sheet;
-    const bindSheet = this.bindSheet;
-    const scopeClass = this.scopeClass;
-    const rulesRef = Object.keys(sheetRules);
+    var result;
+    var sheetRules = this.rules;
+    var thisSheet = this.sheet;
+    var bindSheet = this.bindSheet;
+    var scopeClass = this.scopeClass;
+    var rulesRef = Object.keys(sheetRules);
     //Generate a plain text style sheet
-    function renderFlat(location) {
-            bindSheet(thisSheet, location);
-            let echoSheet = "";
+    function renderFlat() {
+            var echoSheet = "";
             rulesRef.map(function (key) {
-                echoSheet += ` ${scopeClass} ${key}{${sheetRules[key].css}}`
+                echoSheet += scopeClass+' '+key+'{'+sheetRules[key].css+'}';
             });
             echoSheet = echoSheet.replace(/(\r\n|\n|\r)/gm, "").trim();
-            thisSheet.innerHTML = echoSheet;
+            return echoSheet;
     }
 
     switch (location) {
         case 'return':
-            let flatSheet = "";
-            rulesRef.map(function (key) {
-                flatSheet += `${scopeClass} ${key} { ${sheetRules[key].css}  }`
-            });
-            flatSheet = flatSheet.replace(/(\r\n|\n|\r)/gm, "").trim();
+            var flatSheet = renderFlat();
             this.sheet.innerHTML = flatSheet;
             result = {
                 js: sheetRules,
@@ -97,15 +92,19 @@ Fairybread.prototype.render = function (location) {
             };
             break;
         case 'head':
-            renderFlat('head');
+            bindSheet(thisSheet, 'head');
+            thisSheet.innerHTML = renderFlat();
             break;
         case 'body':
-            renderFlat('body');
+             bindSheet(thisSheet, 'body');
+            thisSheet.innerHTML = renderFlat();
         break;
         default:
-            renderFlat('body');
+            bindSheet(thisSheet, 'head');
+            thisSheet.innerHTML = renderFlat();
             break;
     }
+    this.rendered = true;    
     return result;
 }
 
