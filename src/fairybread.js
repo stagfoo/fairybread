@@ -5,7 +5,7 @@ function Fairybread(sheetType) {
     function makeId() {
         var text = "fairybread_";
         var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        var array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+        var array = Array.apply(null, Array(20));
         array.map(function (data, key) { text += possible.charAt(Math.floor(Math.random() * possible.length)); });
         return text;
     };
@@ -18,8 +18,10 @@ function Fairybread(sheetType) {
         styleNode.id = id;
         styleNode.rel = 'stylesheet';
         // required for sheet attr to be created
-        document.body.appendChild(styleNode);
-        return styleNode.sheet;
+        return styleNode;
+    }
+    this.bindSheet = function (node,location) {
+        document[location].appendChild(node);
     }
     // Create Js Object from Css text
     this.cssToJs = function (css) {
@@ -38,7 +40,7 @@ function Fairybread(sheetType) {
     this.specialSheet = false;
     this.specialId = makeId() + "_special";
     this.rendered = false;
-    this.rules = [];
+    this.rules = {};
     this.index = 0;
     this.specialIndex = 0;
 
@@ -47,24 +49,65 @@ function Fairybread(sheetType) {
 Fairybread.prototype.getAll = function () { return this.rules; }
 //Extend any rule to use in another css object
 Fairybread.prototype.extend = function (selector) { return this.rules[selector]; }
+
 Fairybread.prototype.add = function (selector, rules) {
+    if (this.sheetType != 'global') {
+            this.scopeClass = "." + this.id;
+    }
     //Create Css Objects
     if (this.rules[selector.toString()] === undefined) {
-        this.rules[selector.toString()] = this.cssToJs(rules); //Fixme add index to rule object for deleting;
-        //Create Css Rules
-        if (this.sheetType != 'global') {
-            this.scopeClass = "." + this.id.toString();
+        this.rules[selector.toString()] = {
+            js: this.cssToJs(rules),
+            css: rules,
+
         }
-        if (this.sheet.insertRule) {
-            this.sheet.insertRule(this.scopeClass + " " + selector + " {" + rules + "}", this.index)
-        } else {
-            this.sheet.addRule(this.scopeClass + " " + selector, rules, this.index);
-        }
-        this.index++;
     } else {
         console.error(selector + " is ready in this style sheet");
     }
 }
+Fairybread.prototype.render = function (location) {
+    var result;
+    var sheetRules = this.rules;
+    var thisSheet = this.sheet;
+    var bindSheet = this.bindSheet;
+    var scopeClass = this.scopeClass;
+    var rulesRef = Object.keys(sheetRules);
+    //Generate a plain text style sheet
+    function renderFlat() {
+            var echoSheet = "";
+            rulesRef.map(function (key) {
+                echoSheet += scopeClass+' '+key+'{'+sheetRules[key].css+'}';
+            });
+            echoSheet = echoSheet.replace(/(\r\n|\n|\r)/gm, "").trim();
+            return echoSheet;
+    }
+
+    switch (location) {
+        case 'return':
+            var flatSheet = renderFlat();
+            this.sheet.innerHTML = flatSheet;
+            result = {
+                js: sheetRules,
+                css: flatSheet
+            };
+            break;
+        case 'head':
+            bindSheet(thisSheet, 'head');
+            thisSheet.innerHTML = renderFlat();
+            break;
+        case 'body':
+             bindSheet(thisSheet, 'body');
+            thisSheet.innerHTML = renderFlat();
+        break;
+        default:
+            bindSheet(thisSheet, 'head');
+            thisSheet.innerHTML = renderFlat();
+            break;
+    }
+    this.rendered = true;    
+    return result;
+}
+
 
 Fairybread.prototype.addSpecial = function (rule) {
     var id = this.specialId;

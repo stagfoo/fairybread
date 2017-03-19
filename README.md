@@ -17,6 +17,7 @@ var colors = {
 var globalSheet = new Fairybread('global');
 globalSheet.add('body',`background:${colors.yellow}` );
 globalSheet.add('h1',`color:${colors.pink}` );
+globalSheet.render()
 ```
 [Demo](http://codepen.io/stagfoo/pen/xqdWKE)
 
@@ -33,6 +34,7 @@ As you may have guested passing "global" at creation will make a global styleshe
 ```js
 var sheet = new Fairybread();
 sheet.add('a','color:red;');
+sheet.render()
 ```
 [Demo](http://codepen.io/stagfoo/pen/qrmoEr)
 
@@ -60,12 +62,12 @@ sheet.addSpecial(`
       70%   { color:#2d95bf }
       90%   { color:#955ba5 }
       100%   { color:#f15a5a }
-  }
+  }`)  
 ```
 [Demo](http://codepen.io/stagfoo/pen/vxmROp)
 
 `.addSpecial` lets you paste any full css into the special style sheet.
-Its global in its own sheet because its designed for font-face and keyframes, which can't be scoped. this should also help you fix any style syntax not supported yet by fairybread.
+Its global in its own sheet that is render automatically because its designed for font-face and keyframes, which can't be scoped. this should also help you fix any style syntax not supported yet by fairybread.
 
 ## Extend
 Pretty much just object syntax from javascript
