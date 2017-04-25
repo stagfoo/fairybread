@@ -83,7 +83,7 @@ Fairybread.prototype.render = function (location) {
     }
 
     switch (location) {
-        case 'return':
+        case 'raw':
             var flatSheet = renderFlat();
             this.sheet.innerHTML = flatSheet;
             result = {
@@ -91,14 +91,11 @@ Fairybread.prototype.render = function (location) {
                 css: flatSheet
             };
             break;
-        case 'head':
-            bindSheet(thisSheet, 'head');
-            thisSheet.innerHTML = renderFlat();
-            break;
         case 'body':
-             bindSheet(thisSheet, 'body');
+            bindSheet(thisSheet, 'body');
             thisSheet.innerHTML = renderFlat();
         break;
+        case 'head':
         default:
             bindSheet(thisSheet, 'head');
             thisSheet.innerHTML = renderFlat();
