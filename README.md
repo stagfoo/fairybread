@@ -1,11 +1,11 @@
 ![Logo](logo.png)
 
 is a javascript utility to manage css styles and replace precompilers.
-you have probaby all read [this talk](https://speakerdeck.com/vjeux/react-css-in-js) and you have probablly all had issues with libraries that have local binds not building.
+you have probably all read [this talk](https://speakerdeck.com/vjeux/react-css-in-js) and you have probably all had issues with libraries that have local binds not building.
 
 this little 1.38kb library interacts with style tags on the page to help you create pretty shit.
 
-[![NPM](https://nodei.co/npm/fairybread.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/fairybread/)
+[![NPM](https://nodei.co/npm/fairybread.png?downloads=true&downloadRank=false&stars=true)](https://nodei.co/npm/fairybread/)
 
 ## Basic Setup
 ```js
@@ -46,7 +46,7 @@ outputs
     }
 </style>
 ```
-`sheet.id` is the scoping class (excluding the .) that you can attached appropriately for example at the top of a component.
+`sheet.id` is the scoping class (excluding the .) that you can attached appropriately for example at the top of a component. the render function allows you to choose your rendering method incase you want to include your css inside the component
 
 ## Specials
 Now I know all you designer types love the fonts and keyframes so you can add these as well.
@@ -62,13 +62,27 @@ sheet.addSpecial(`
       70%   { color:#2d95bf }
       90%   { color:#955ba5 }
       100%   { color:#f15a5a }
-  }`)  
+  }`)
 ```
 [Demo](http://codepen.io/stagfoo/pen/vxmROp)
 
 `.addSpecial` lets you paste any full css into the special style sheet.
 Its global in its own sheet that is render automatically because its designed for font-face and keyframes, which can't be scoped. this should also help you fix any style syntax not supported yet by fairybread.
 
+## Render
+a new function called render allow you to choose the render location of your sheet. it takes 3 options.
+
+```js
+sheet.render('raw') // this returns an object with Js and plaintext css
+ {
+     js: //javascript object of styles,
+     css: //a css string for rendering into a style tag.
+ }
+
+ sheet.render('head') //renders a style tag into the head bottom
+ sheet.render('body') //renders a style tag into the body bottom
+ shhet.render()       // this is the same as 'head'
+```
 ## Extend
 Pretty much just object syntax from javascript
 ```js
