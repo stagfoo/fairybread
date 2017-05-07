@@ -1,6 +1,7 @@
 function Fairybread(sheetType) {
     this.sheetType = sheetType;
     this.scopeClass = '';
+    this.ensureList = {};
     // Create Id
     function makeId() {
         var text = "fairybread_";
@@ -101,7 +102,7 @@ Fairybread.prototype.render = function (location) {
             thisSheet.innerHTML = renderFlat();
             break;
     }
-    this.rendered = true;    
+    this.rendered = true;
     return result;
 }
 
@@ -120,6 +121,8 @@ Fairybread.prototype.addSpecial = function (rule) {
         this.specialSheet.innerHTML += "\n" + rule;
     }
 }
+
+
 
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     module.exports = Fairybread;

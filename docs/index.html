@@ -147,9 +147,9 @@
 
         globalSheet.render('head')
         logo.render('body')
-        document.getElementById('card-style').innerHTML = card.render('return').css;
-        
-        document.getElementById('header').classList += ' ' + logo_id;        
+        document.getElementById('card-style').innerHTML = card.render('raw').css;
+
+        document.getElementById('header').classList += ' ' + logo_id;
         document.getElementById('card1').classList += ' ' + card_id;
     </script>
 
