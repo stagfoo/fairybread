@@ -145,7 +145,12 @@
         card.add('a', `color:grey; padding:1em; width:100%; background:#efefef; display:block; text-decoration:none;`)
         card.add('a:hover', `background:${vars.colors.yellow}; color:${vars.colors.orange}`)
 
+        globalSheet.ensure('tachyons', 'https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css')
         globalSheet.render('head')
+
+        logo.ensure('tachyons', 'https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css')
+        card.ensure('tachyons', 'https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css')
+
         logo.render('body')
         document.getElementById('card-style').innerHTML = card.render('raw').css;
 
