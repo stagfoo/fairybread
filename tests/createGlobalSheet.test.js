@@ -4,7 +4,7 @@ test(`Is Sheet's defined`, () => {
   expect(sheet).toBeDefined()
 })
 test(`Is it a global`,() => {
-  expect(sheet.sheetType).toBe('global')
+   expect(sheet.sheetType).toBe('global')
   expect(sheet.specialSheet).toBeFalsy()
 })
 
