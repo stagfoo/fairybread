@@ -30,12 +30,14 @@ describe(`Render Methods`, () => {
         const renderSheet = sheet.render('head')
         const element = document.getElementById(renderSheet);
         expect(element).toBeDefined();
+        expect(element.parentElement.nodeName).toBe('HEAD');
         expect(element.innerHTML).toBe('body{background:hotpink}');
     });
      // check body method
     test(`is body method working`, () => {  
         const renderSheet = sheet.render('body')
         const element = document.getElementById(renderSheet);
+        expect(element.parentElement.nodeName).toBe('BODY');
         expect(element).toBeDefined();
         expect(element.innerHTML).toBe('body{background:hotpink}');
     });
