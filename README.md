@@ -62,7 +62,7 @@ sheet.addSpecial(`
       70%   { color:#2d95bf }
       90%   { color:#955ba5 }
       100%   { color:#f15a5a }
-  }`)  
+  }`)
 ```
 [Demo](http://codepen.io/stagfoo/pen/vxmROp)
 
@@ -73,7 +73,7 @@ Its global in its own sheet that is render automatically because its designed fo
 a new function called render allow you to choose the render location of your sheet. it takes 3 options.
 
 ```js
-sheet.render('return') // this returns an object
+sheet.render('raw') // this returns an object with Js and plaintext css
  {
      js: //javascript object of styles,
      css: //a css string for rendering into a style tag.
