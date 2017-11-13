@@ -1,7 +1,6 @@
 function Fairybread(sheetType) {
     this.sheetType = sheetType;
     this.scopeClass = '';
-    this.ensureList = {};
     // Create Id
     function makeId() {
         var text = "fairybread_";
@@ -84,7 +83,7 @@ Fairybread.prototype.render = function (location) {
     }
 
     switch (location) {
-        case 'raw':
+        case 'return':
             var flatSheet = renderFlat();
             this.sheet.innerHTML = flatSheet;
             result = {
@@ -92,17 +91,20 @@ Fairybread.prototype.render = function (location) {
                 css: flatSheet
             };
             break;
+        case 'head':
+            bindSheet(thisSheet, 'head');
+            thisSheet.innerHTML = renderFlat();
+            break;
         case 'body':
-            bindSheet(thisSheet, 'body');
+             bindSheet(thisSheet, 'body');
             thisSheet.innerHTML = renderFlat();
         break;
-        case 'head':
         default:
             bindSheet(thisSheet, 'head');
             thisSheet.innerHTML = renderFlat();
             break;
     }
-    this.rendered = true;
+    this.rendered = true;    
     return result;
 }
 
@@ -121,8 +123,6 @@ Fairybread.prototype.addSpecial = function (rule) {
         this.specialSheet.innerHTML += "\n" + rule;
     }
 }
-
-
 
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     module.exports = Fairybread;

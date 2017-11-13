@@ -1,7 +1,6 @@
 function Fairybread(sheetType) {
     this.sheetType = sheetType;
     this.scopeClass = '';
-    this.ensureList = {};
     // Create Id
     function makeId() {
         var text = "fairybread_";
@@ -84,7 +83,7 @@ Fairybread.prototype.render = function (location) {
     }
 
     switch (location) {
-        case 'raw':
+        case 'return':
             var flatSheet = renderFlat();
             this.sheet.innerHTML = flatSheet;
             result = {
@@ -92,19 +91,20 @@ Fairybread.prototype.render = function (location) {
                 css: flatSheet
             };
             break;
-        case 'body':
-            bindSheet(thisSheet, 'body');
-            thisSheet.innerHTML = renderFlat();
-            result = this.sheet.id;
-        break;
         case 'head':
+            bindSheet(thisSheet, 'head');
+            thisSheet.innerHTML = renderFlat();
+            break;
+        case 'body':
+             bindSheet(thisSheet, 'body');
+            thisSheet.innerHTML = renderFlat();
+        break;
         default:
             bindSheet(thisSheet, 'head');
             thisSheet.innerHTML = renderFlat();
-            result = this.sheet.id;
             break;
     }
-    this.rendered = true;
+    this.rendered = true;    
     return result;
 }
 
@@ -123,37 +123,6 @@ Fairybread.prototype.addSpecial = function (rule) {
         this.specialSheet.innerHTML += "\n" + rule;
     }
 }
-Fairybread.prototype.ensure = function (key, path) {
-    function bindSheet(node,location) {
-        document[location].appendChild(node);
-    }
-    function createSheet(id) {
-        var styleNode = document.createElement('style');
-        styleNode.type = 'text/css';
-        styleNode.id = id;
-        styleNode.rel = 'stylesheet';
-        // required for sheet attr to be created
-        return styleNode;
-    }
-    //check if this sheet has already ensured it
-    var sheetId = this.id;
-    var ensureList = this.ensureList;
-    if(ensureList[key] !== true){
-        //it hasn't ok, is it on the page anywhere.
-        var exist = false;
-        var allFbs = [].slice.call(document.querySelectorAll('style[id*=fairybread_]'));
-        allFbs.map(function (node, i) { if(node.id.indexOf(key) > -1){ exist = true; } })
-        if(exist === false){
-              var temp_id = sheetId+'_'+key;
-            var ensured = createSheet(temp_id);
-            ensured.innerHTML = '@import("'+path+'")';
-            bindSheet(ensured, 'head');
-            ensureList[key] = true;
-        }
-    }
-}
-
-
 
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     module.exports = Fairybread;
