@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1510176315729" clover="3.2.0">
-  <project timestamp="1510176315730" name="All files">
-    <metrics statements="98" coveredstatements="67" conditionals="22" coveredconditionals="11" methods="18" coveredmethods="13" elements="138" coveredelements="91" complexity="0" loc="98" ncloc="98" packages="1" files="1" classes="1">
+<coverage generated="1510606300792" clover="3.2.0">
+  <project timestamp="1510606300792" name="All files">
+    <metrics statements="98" coveredstatements="67" conditionals="22" coveredconditionals="11" methods="18" coveredmethods="12" elements="138" coveredelements="90" complexity="0" loc="98" ncloc="98" packages="1" files="1" classes="1">
       <file name="fairybread.js" path="/home/al/Code/fairybread/src/fairybread.js">
-        <metrics statements="98" coveredstatements="67" conditionals="22" coveredconditionals="11" methods="18" coveredmethods="13"/>
+        <metrics statements="98" coveredstatements="67" conditionals="22" coveredconditionals="11" methods="18" coveredmethods="12"/>
         <line num="2" count="16" type="stmt"/>
         <line num="3" count="16" type="stmt"/>
         <line num="4" count="16" type="stmt"/>
