@@ -26,7 +26,6 @@ describe(`this.cssToJs`,() =>{
 
 describe(`Extend`,() =>{
   test(`sheet extend plain text`, () => { 
-    console.log(sheet.getAll());
     const css = sheet.extend('body').css;
     expect(css).toEqual('background:hotpink');
     const cssB = sheet.extend('.example-class').css;
