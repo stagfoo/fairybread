@@ -95,11 +95,13 @@ Fairybread.prototype.render = function (location) {
         case 'body':
             bindSheet(thisSheet, 'body');
             thisSheet.innerHTML = renderFlat();
+            result = this.sheet.id;
         break;
         case 'head':
         default:
             bindSheet(thisSheet, 'head');
             thisSheet.innerHTML = renderFlat();
+            result = this.sheet.id;
             break;
     }
     this.rendered = true;
