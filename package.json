@@ -5,7 +5,9 @@
   "main": "dist/fairybread.min.js",
   "scripts": {
     "test": "jest",
-    "build": "npm run test && uglifyjs --compress --mangle -- input.js"
+    "build": "npm run test && uglifyjs src/fairybread.js -o docs/fairybread.min.js",
+    "new-release": "npm run test && uglifyjs src/fairybread.js -o docs/fairybread.min.js",
+    "docs": "npm run test && http-server docs/"
   },
   "repository": {
     "type": "git",

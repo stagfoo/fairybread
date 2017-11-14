@@ -13,7 +13,7 @@ function Fairybread(sheetType) {
     // Uniquish Id
     this.id = makeId();
     // Create Sheetsheet
-    function createSheet(id) {
+    this.createSheet = function (id) {
         var styleNode = document.createElement('style');
         styleNode.type = 'text/css';
         styleNode.id = id;
@@ -37,7 +37,7 @@ function Fairybread(sheetType) {
         return ruleSet;
     }
 
-    this.sheet = createSheet(this.id);
+    this.sheet = this.createSheet(this.id);
     this.specialSheet = false;
     this.specialId = makeId() + "_special";
     this.rendered = false;
@@ -124,17 +124,6 @@ Fairybread.prototype.addSpecial = function (rule) {
     }
 }
 Fairybread.prototype.ensure = function (key, path) {
-    function bindSheet(node,location) {
-        document[location].appendChild(node);
-    }
-    function createSheet(id) {
-        var styleNode = document.createElement('style');
-        styleNode.type = 'text/css';
-        styleNode.id = id;
-        styleNode.rel = 'stylesheet';
-        // required for sheet attr to be created
-        return styleNode;
-    }
     //check if this sheet has already ensured it
     var sheetId = this.id;
     var ensureList = this.ensureList;
@@ -145,9 +134,9 @@ Fairybread.prototype.ensure = function (key, path) {
         allFbs.map(function (node, i) { if(node.id.indexOf(key) > -1){ exist = true; } })
         if(exist === false){
               var temp_id = sheetId+'_'+key;
-            var ensured = createSheet(temp_id);
+            var ensured = this.createSheet(temp_id);
             ensured.innerHTML = '@import("'+path+'")';
-            bindSheet(ensured, 'head');
+            this.bindSheet(ensured, 'head');
             ensureList[key] = true;
         }
     }
