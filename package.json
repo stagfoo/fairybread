@@ -1,11 +1,13 @@
 {
   "name": "fairybread",
-  "version": "1.1.2",
-  "description": "a javascript utility to manage css and replace sass",
+  "version": "1.2.0",
+  "description": "a javascript utility to manage css and match sass functions",
   "main": "dist/fairybread.min.js",
   "scripts": {
     "test": "jest",
-    "build": "webpack -p"
+    "build": "npm run test && uglifyjs src/fairybread.js -o docs/fairybread.min.js",
+    "new-release": "npm run test && uglifyjs src/fairybread.js -o docs/fairybread.min.js",
+    "docs": "npm run test && http-server docs/"
   },
   "repository": {
     "type": "git",
