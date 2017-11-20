@@ -5,6 +5,8 @@ you have probably all read [this talk](https://speakerdeck.com/vjeux/react-css-i
 
 this little 1.38kb library interacts with style tags on the page to help you create pretty shit.
 
+[![npm version](https://badge.fury.io/js/fairybread.svg)](https://badge.fury.io/js/fairybread)
+![core gzip size](http://img.badgesize.io/https://unpkg.com/fairybread@1.2.0/dist/fairybread.min.js?compression=gzip&label=core%20gzip%20size)
 [![NPM](https://nodei.co/npm/fairybread.png?downloads=true&downloadRank=false&stars=true)](https://nodei.co/npm/fairybread/)
 
 ## Basic Setup
