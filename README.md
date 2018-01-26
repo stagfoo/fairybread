@@ -3,7 +3,7 @@
 [![npm version](https://badge.fury.io/js/fairybread.svg)](https://badge.fury.io/js/fairybread)
 ![core gzip size](http://img.badgesize.io/https://unpkg.com/fairybread@1.2.0/dist/fairybread.min.js?compression=gzip&label=core%20gzip%20size)
 
-[![Gitter chat](https://badges.gitter.im/stagfoo/fairybread.png)](https://gitter.im/fairybread "Gitter chat")
+[![Gitter chat](https://img.shields.io/badge/gitter-fairybread-ff69b4.svg)](https://gitter.im/fairybread "Gitter chat")
 
 is a javascript utility to manage css styles and replace precompilers.
 you have probably all read [this talk](https://speakerdeck.com/vjeux/react-css-in-js) and you have probably all had issues with libraries that have local binds not building.
