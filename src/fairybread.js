@@ -143,7 +143,7 @@ Fairybread.prototype.ensure = function (key, path) {
         if(exist === false){
               var temp_id = sheetId+'_'+key;
             var ensured = this.createSheet(temp_id);
-            ensured.innerHTML = '@import("'+path+'")';
+            ensured.innerHTML = '@import url("'+path+'")';
             this.bindSheet(ensured, 'head');
             ensureList[key] = true;
         }
