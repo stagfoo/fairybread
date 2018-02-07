@@ -77,6 +77,12 @@
                 font-size: 15px;
                 text-align: left
             `);
+        const tag = new Fairybread();
+        tag.add('.card', `
+            color: ${vars.colors.pink}
+            background: ${vars.colors.black}
+        `)
+        document.body.appendChild(tag.render('here').tag);
         globalSheet.add('#main', `
                 font-weight:bold;
                 width:70vw;
@@ -149,10 +155,11 @@
 
         logo.ensure('tachyons', 'https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css')
         card.ensure('tachyons', 'https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css')
+        logo.render('body');
 
-        logo.render('body')
+
+        // Add css classes
         document.getElementById('card-style').innerHTML = card.render('raw').css;
-
         document.getElementById('header').classList += ' ' + logo_id;
         document.getElementById('card1').classList += ' ' + card_id;
     </script>
