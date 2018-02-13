@@ -1,6 +1,8 @@
 const Fairybread = require('../src/fairybread');
 
-const sheet = new Fairybread('global');
+const sheet = new Fairybread({
+	global:true
+});
 // Temp page
 document.body.innerHTML = `
 <head></head>
