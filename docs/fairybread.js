@@ -1,9 +1,4 @@
 function Fairybread(options) {
-    if (typeof options === 'undefined') {
-        options = {
-            global: false
-        };
-    }
     this.sheetType = options.global ? 'global' : 'local';
     this.ensureList = {};
     function makeId() {
@@ -44,9 +39,6 @@ function Fairybread(options) {
     this.rules = {};
     this.index = 0;
     this.specialIndex = 0;
-    this.replaceHost = function (css, replace) {
-        return css.split(':host').join(this.scopeClass);
-    };
 }
 Fairybread.prototype.extend = function (selector) {
     return this.rules[selector];
@@ -123,17 +115,17 @@ Fairybread.prototype.addSpecial = function (rule) {
     }
 };
 Fairybread.prototype.free = function (css) {
-    var _this = this;
     var v = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         v[_i - 1] = arguments[_i];
     }
-    debugger;
-    var flat = css.map((function (str, i) {
-        return _this.replaceHost(str, _this.scopedClass) + (v[i] || '');
-    })).join('');
+    var s = css.split(':host').join(this.scopeClass);
+    var flat = s.map((function (str, i) { return str + (v[i] || ''); })).join('');
     this.sheet.innerHTML = flat;
-    return this.sheet;
+    return {
+        tag: this.sheet,
+        id: this.id
+    };
 };
 Fairybread.prototype.ensure = function (key, path) {
     var sheetId = this.id;

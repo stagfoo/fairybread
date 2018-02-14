@@ -1,6 +1,11 @@
-function Fairybread(options) {
 
-	this.sheetType = options.global ? 'global' : 'local';
+function Fairybread(options) {
+  if(typeof options === 'undefined'){
+    options = {
+      global: false
+    } 
+  }
+  this.sheetType = options.global ? 'global' : 'local';
 	this.ensureList = {};
   // Create Id
 	function makeId() {
@@ -46,7 +51,10 @@ function Fairybread(options) {
 	this.rendered = false;
 	this.rules = {};
 	this.index = 0;
-	this.specialIndex = 0;
+  this.specialIndex = 0;
+  this.replaceHost = function (css, replace){
+  return css.split(':host').join(this.scopeClass);
+}
 }
 
 // Extend any rule to use in another css object
@@ -75,7 +83,8 @@ Fairybread.prototype.render = function (location) {
     // Generate a plain text style sheet
 	function renderFlat() {
 		var echoSheet = '';
-		rulesRef.map(key => {
+    rulesRef.map(key => {
+      //TODO allow host
 			echoSheet += scopeClass + ' ' + key + '{' + sheetRules[key].css + '}';
 		});
 		echoSheet = echoSheet.replace(/(\r\n|\n|\r)/gm, '').trim();
@@ -130,13 +139,12 @@ Fairybread.prototype.addSpecial = function (rule) {
 };
 
 Fairybread.prototype.free = function (css, ...v){
-	var s = css.split(':host').join(this.scopeClass);
-	var flat = s.map(((str,i) => str + (v[i] || ''))).join('');
+  debugger 
+  var flat = css.map(((str,i) => {
+    return this.replaceHost(str, this.scopedClass) + (v[i] || '')
+  })).join('');
 	this.sheet.innerHTML = flat;
-	return {
-		tag: this.sheet,
-		id: this.id
-	}
+	return this.sheet
 }
 
 Fairybread.prototype.ensure = function (key, path) {

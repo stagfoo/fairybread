@@ -63,7 +63,9 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f15a5a', endColorstr='#955ba5',GradientType=1 ); /* IE6-9 */
     `
         }
-        const globalSheet = new Fairybread('global');
+const globalSheet = new Fairybread({
+  global: true
+});
         globalSheet.addSpecial(`@import url('https://fonts.googleapis.com/css?family=Sacramento|Raleway');`);
         globalSheet.add('body', `
     background-size:7em;
@@ -77,7 +79,7 @@
                 font-size: 15px;
                 text-align: left
             `);
-        const tag = new Fairybread();
+  const tag = new Fairybread();
         tag.add('.card', `
             color: ${vars.colors.pink}
             background: ${vars.colors.black}
@@ -157,7 +159,16 @@
         card.ensure('tachyons', 'https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css')
         logo.render('body');
 
-
+          var free = new Fairybread().free`
+            :host {
+              color: black;
+            }
+            :host a {
+              color: hotpink;
+            }
+          ` 
+        console.log(free);
+        console.log(free.id);
         // Add css classes
         document.getElementById('card-style').innerHTML = card.render('raw').css;
         document.getElementById('header').classList += ' ' + logo_id;
