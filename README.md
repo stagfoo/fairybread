@@ -13,7 +13,6 @@ take control of your style tags. create, share, extend and render css with javac
 </p>
 
 # Includes
-- 🧚 Light and small
 - 🏡 Structured & clear
 - 🔮 Css in js
 - ⚙️ Functional
