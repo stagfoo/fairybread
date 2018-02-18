@@ -31,7 +31,6 @@ globalSheet.add('body',`background:${colors.yellow}` );
 globalSheet.add('h1',`color:${colors.pink}` );
 globalSheet.render()
 ```
-[Demo](http://codepen.io/stagfoo/pen/xqdWKE)
 
 Outputs
 ```html
@@ -76,7 +75,6 @@ sheet.addSpecial(`
       100%   { color:#f15a5a }
   }`)
 ```
-[Demo](http://codepen.io/stagfoo/pen/vxmROp)
 
 `.addSpecial` lets you paste any full css into the special style sheet.
 Its global in its own sheet that is render automatically because its designed for font-face and keyframes, which can't be scoped. this should also help you fix any style syntax not supported yet by fairybread.
