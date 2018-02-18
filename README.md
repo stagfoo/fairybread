@@ -16,7 +16,7 @@ take control of your style tags. create, share, extend and render css with javac
 - 🏡 Structured & clear
 - 🔮 Css in js
 - ⚙️ Functional
-- 🤷 framework agnostic
+- 🤷‍♀️ framework agnostic
 
 
 ## Basic Setup
