@@ -1,11 +1,24 @@
-![Logo](logo.png)
+<p align="center"><img src="https://raw.githubusercontent.com/stagfoo/fairybread/develop/logo.png" height="150px" ></img></p>
+<p align="center">
+  <a href="https://gitter.im/fairybread/Lobby">
+  <img src="https://img.shields.io/badge/chat%20on-gitter-ff69b4.svg?style=flat-square" />
+  </a>
+  <a href="https://www.npmjs.com/package/fairybread">
+    <img src="https://img.shields.io/npm/dm/fairybread.svg?style=flat-square" />
+  </a>
+    <img src="https://img.shields.io/packagist/l/doctrine/orm.svg?style=flat-square" />  
+  </p>
+ <p align="center">
+take control of your style tags. create, share, extend and render css with javacsript
+</p>
 
-is a javascript utility to manage css styles and replace precompilers.
-you have probably all read [this talk](https://speakerdeck.com/vjeux/react-css-in-js) and you have probably all had issues with libraries that have local binds not building.
+# Includes
+- 🧚 Light and small
+- 🏡 Structured & clear
+- 🔮 Css in js
+- ⚙️ Functional
+- 🤷 framework agnostic
 
-this little 1.38kb library interacts with style tags on the page to help you create pretty shit.
-
-[![NPM](https://nodei.co/npm/fairybread.png?downloads=true&downloadRank=false&stars=true)](https://nodei.co/npm/fairybread/)
 
 ## Basic Setup
 ```js
@@ -92,4 +105,7 @@ sheet.add ('.button', `color:${tag_color}`);
 var tag_color = sheet.getAll()['a'];
 sheet.add ('.button', `color:${tag_color}`);
 ```
-Well now that's everything for now. Now your css is in js you have function and vars and all that goodness.
+
+# Idea Behind Fairybread
+you have probably all read [this talk](https://speakerdeck.com/vjeux/react-css-in-js) and you have probably all had issues with libraries that have local binds not building.
+
