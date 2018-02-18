@@ -47,7 +47,6 @@ var sheet = new Fairybread();
 sheet.add('a','color:red;');
 sheet.render()
 ```
-[Demo](http://codepen.io/stagfoo/pen/qrmoEr)
 
 outputs
 ```html
