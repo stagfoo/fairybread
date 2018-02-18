@@ -131,15 +131,15 @@ Fairybread.prototype.addSpecial = function (rule) {
 		styleNode.type = 'text/css';
 		styleNode.id = id;
 		document.body.appendChild(styleNode);
-		this.specialSheet = document.getElementById(id);  // FIXME
+    this.specialSheet = document.getElementById(id);  
+    // replace with free function?
 		this.specialSheet.innerHTML = rule;
 	} else {
 		this.specialSheet.innerHTML += '\n' + rule;
 	}
 };
 
-Fairybread.prototype.free = function (css, ...v){
-  debugger 
+Fairybread.prototype.css = function (css, ...v){
   var flat = css.map(((str,i) => {
     return this.replaceHost(str, this.scopedClass) + (v[i] || '')
   })).join('');

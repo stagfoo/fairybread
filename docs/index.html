@@ -159,7 +159,7 @@ const globalSheet = new Fairybread({
         card.ensure('tachyons', 'https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css')
         logo.render('body');
 
-          var free = new Fairybread().free`
+          var cssTag = new Fairybread().css`
             :host {
               color: black;
             }
@@ -167,8 +167,8 @@ const globalSheet = new Fairybread({
               color: hotpink;
             }
           ` 
-        console.log(free);
-        console.log(free.id);
+        console.log(css);
+        console.log(css.id);
         // Add css classes
         document.getElementById('card-style').innerHTML = card.render('raw').css;
         document.getElementById('header').classList += ' ' + logo_id;

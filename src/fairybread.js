@@ -121,7 +121,7 @@ Fairybread.prototype.addSpecial = function (rule) {
         this.specialSheet.innerHTML += '\n' + rule;
     }
 };
-Fairybread.prototype.free = function (css) {
+Fairybread.prototype.css = function (css) {
     var v = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         v[_i - 1] = arguments[_i];
