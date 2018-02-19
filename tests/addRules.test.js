@@ -1,6 +1,11 @@
-const Fairybread = require('../src/fairybread');
+const Fairybread = require('../dist/fairybread');
 
-const sheet = new Fairybread('global');
+const sheet = new Fairybread({
+	global: true
+});
+const localSheet = new Fairybread({
+	global: false
+})
 // Temp page
 document.body.innerHTML = `
 <head></head>
@@ -43,3 +48,12 @@ describe(`Render Methods`, () => {
 		expect(element.innerHTML).toBe('body{background:hotpink}');
 	});
 });
+
+describe(`Render Methods`, () => {
+	test(`backtick function`, () => {
+		const renderSheet = localSheet.css`
+			:host { background: ${pink}; }
+		`;
+		expect(renderSheet.innerHTML).toContain('{ background: hotpink; }')
+	})
+})

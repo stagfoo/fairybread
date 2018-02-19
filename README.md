@@ -1,16 +1,23 @@
-![Logo](logo.png)
+<p align="center"><img src="https://raw.githubusercontent.com/stagfoo/fairybread/develop/logo.png" height="150px" ></img></p>
+<p align="center">
+  <a href="https://gitter.im/fairybread/Lobby">
+  <img src="https://img.shields.io/badge/chat%20on-gitter-ff69b4.svg?style=flat-square" />
+  </a>
+  <a href="https://www.npmjs.com/package/fairybread">
+    <img src="https://img.shields.io/npm/dm/fairybread.svg?style=flat-square" />
+  </a>
+    <img src="https://img.shields.io/packagist/l/doctrine/orm.svg?style=flat-square" />
+  </p>
+ <p align="center">
+take control of your style tags. create, share, extend and render css with javacsript
+</p>
 
-[![npm version](https://badge.fury.io/js/fairybread.svg)](https://badge.fury.io/js/fairybread)
-![core gzip size](http://img.badgesize.io/https://unpkg.com/fairybread@1.2.0/dist/fairybread.min.js?compression=gzip&label=core%20gzip%20size)
 
-[![Gitter chat](https://img.shields.io/badge/gitter-fairybread-ff69b4.svg)](https://gitter.im/fairybread "Gitter chat")
-
-is a javascript utility to manage css styles and replace precompilers.
-you have probably all read [this talk](https://speakerdeck.com/vjeux/react-css-in-js) and you have probably all had issues with libraries that have local binds not building.
-
-this little 1.38kb library interacts with style tags on the page to help you create pretty shit.
-
-[![NPM](https://nodei.co/npm/fairybread.png?downloads=true&downloadRank=false&stars=true)](https://nodei.co/npm/fairybread/)
+# Includes
+- 🏡 Structured & clear
+- 🔮 Css in js
+- ⚙️ Functional
+- 🤷‍♀️ framework agnostic
 
 ## Basic Setup
 ```js
@@ -24,7 +31,6 @@ globalSheet.add('body',`background:${colors.yellow}` );
 globalSheet.add('h1',`color:${colors.pink}` );
 globalSheet.render()
 ```
-[Demo](http://codepen.io/stagfoo/pen/xqdWKE)
 
 Outputs
 ```html
@@ -41,7 +47,6 @@ var sheet = new Fairybread();
 sheet.add('a','color:red;');
 sheet.render()
 ```
-[Demo](http://codepen.io/stagfoo/pen/qrmoEr)
 
 outputs
 ```html
@@ -69,7 +74,6 @@ sheet.addSpecial(`
       100%   { color:#f15a5a }
   }`)
 ```
-[Demo](http://codepen.io/stagfoo/pen/vxmROp)
 
 `.addSpecial` lets you paste any full css into the special style sheet.
 Its global in its own sheet that is render automatically because its designed for font-face and keyframes, which can't be scoped. this should also help you fix any style syntax not supported yet by fairybread.
@@ -97,4 +101,7 @@ sheet.add ('.button', `color:${tag_color}`);
 var tag_color = sheet.getAll()['a'];
 sheet.add ('.button', `color:${tag_color}`);
 ```
-Well now that's everything for now. Now your css is in js you have function and vars and all that goodness.
+
+# Idea Behind Fairybread
+you have probably all read [this talk](https://speakerdeck.com/vjeux/react-css-in-js) and you have probably all had issues with libraries that have local binds not building.
+
