@@ -1,4 +1,4 @@
-<p align="center"><img src="docs/logo.svg" height="150px" ></img></p>
+<p align="center"><img src="docs/logo.svg" height="170px" ></img></p>
 <p align="center">
   <a href="https://gitter.im/fairybread/Lobby">
   <img src="https://img.shields.io/badge/chat%20on-gitter-ff69b4.svg?style=flat-square" />
