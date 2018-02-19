@@ -85,7 +85,7 @@ sheet.addSpecial(`
 Its global in its own sheet that is rendered automatically because its designed for font-face and keyframes, which can't be scoped. this should also help you fix any style syntax not supported yet by fairybread.
 
 ## Render
-a new function called render allow you to choose the render location of your sheet. it takes 3 options.
+a new function called render allow you to choose the render location of your sheet. it takes these options.
 
 ```js
 sheet.render('raw') // this returns an object with Js and plaintext css
@@ -93,7 +93,6 @@ sheet.render('raw') // this returns an object with Js and plaintext css
      js: //javascript object of styles,
      css: //a css string for rendering into a style tag.
  }
-
  sheet.render('head') //renders a style tag into the head bottom
  sheet.render('body') //renders a style tag into the body bottom
  sheet.render('here') //returns an style tag and id for components
@@ -132,7 +131,3 @@ sheet.add ('.button', `color:${tag_color}`);
 var tag_color = sheet.rules['a'].js;
 sheet.add ('.button', `${tag_color}`);
 ```
-
-# Idea Behind Fairybread
-you have probably all read [this talk](https://speakerdeck.com/vjeux/react-css-in-js) and you have probably all had issues with libraries that have local binds not building.
-
