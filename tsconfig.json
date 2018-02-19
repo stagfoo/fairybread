@@ -1,19 +1,23 @@
 {
   "compilerOptions": {
-      "baseUrl": "./node_modules",
       "target": "es5",
       "removeComments": true,
       "listFiles": true,
-      "rootDir": "./src/",
       "outFile": "./dist/fairybread.min.js",
       "paths": {
-            "*": ["*"]
-          },
+        "*": ["*"]
+      },
       "lib": [ "dom", "esnext" ],
       "allowSyntheticDefaultImports": true,
-      "jsx": "react",
       "module": "amd",
-      "declaration": true,
+      "noResolve": true,
       "moduleResolution": "node"
-    }
+  },
+  "include": [
+    "src/**/*"
+    ],
+    "exclude": [
+      "node_modules",
+      "**/*.spec.ts"
+    ]
 }

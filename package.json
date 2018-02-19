@@ -5,8 +5,8 @@
   "main": "dist/fairybread.min.js",
   "scripts": {
     "test": "jest",
-    "build": "npm run test && uglifyjs src/fairybread.js -o docs/fairybread.min.js",
-    "new-release": "npm run test && uglifyjs src/fairybread.js -o dist/fairybread.min.js",
+    "build:docs": "npm run test && tsc ./src/fairybread.ts --outFile ./docs/fairybread.min.js",
+    "build:release": "npm run test && tsc ./src/fairybread.ts  --outFile ./dist/fairybread.min.js",
     "docs": "npm run test && http-server docs/"
   },
   "repository": {
