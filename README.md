@@ -6,7 +6,7 @@
   <a href="https://www.npmjs.com/package/fairybread">
     <img src="https://img.shields.io/npm/dm/fairybread.svg?style=flat-square" />
   </a>
-    <img src="https://img.shields.io/packagist/l/doctrine/orm.svg?style=flat-square" />  
+    <img src="https://img.shields.io/packagist/l/doctrine/orm.svg?style=flat-square" />
   </p>
  <p align="center">
 take control of your style tags. create, share, extend and render css with javacsript

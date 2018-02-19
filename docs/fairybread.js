@@ -4,7 +4,7 @@ function Fairybread(options) {
             global: false
         };
     }
-    this.sheetType = options.global ? 'global' : 'local';
+    this.sheetType = options.global === true ? 'global' : 'local';
     this.ensureList = {};
     // Create Id
     function makeId() {

@@ -8,7 +8,7 @@
 <body class="">
     <div id="main">
         <header id="header">
-            <h1>Fairybread</h1>
+            <img src="logo.png" alt="">
         </header>
         <p>Fairybread is a javascript utility to manage css styles and replace precompilers. you have probaby all read <a href="https://speakerdeck.com/vjeux/react-css-in-js" >this talk</a> and you have probablly all had issues with libraries that have local binds not building. this little 2.4kb libraries interacts with style tags on the page to help you create pretty shit.
         </p>
@@ -24,18 +24,14 @@
         </a>
     </div>
     <div class="fiddy" id="card1" >
-        <div class="color-wrapper">
             <img width="400" height="auto" src="https://i.ytimg.com/vi/Jj9VYKlPVMs/maxresdefault.jpg" alt="">
-        </div>
         <h1>I'm a scoped card Horray!</h1>
         <p>Every tag inside this card is styled under a randomly generated class.<br> Wow much scope, such less overides!</p>
         <a href="https://www.youtube.com/watch?v=Jj9VYKlPVMs">Make Fairybread, not war</a>
         <style id="card-style"></style>
     </div>
     <div class="fiddy" id="card2" >
-        <div class="color-wrapper">
             <img width="400" height="auto" src="https://i.ytimg.com/vi/Jj9VYKlPVMs/maxresdefault.jpg" alt="">
-        </div>
         <h1>i'm the same elements </h1>
         <p>but I look like terrible cause I ain't got no style!</p>
         <a href="https://www.youtube.com/watch?v=Jj9VYKlPVMs">Make Fairybread, not war</a>
@@ -46,38 +42,37 @@
         var vars = {
             colors: {
                 white: '#ffffff',
-                yellow: '#FFFFBE',
-                orange: '#F7CD99',
-                pink: '#ff9cc8',
-                purple: '#4b007d',
-                blue: 'blue',
-                bread: 'rgb(255, 243, 189)',
-                crust: '#ffb903',
-                black: '#282828'
+                yellow: '#FDCA21',
+                green: '#9BF44A',
+                pink: '#FF008A',
+                purple: '#6A00FD',
+                blue: '#01FAFC',
+                darkBlue: '#2B2DFE',
+                bg: '#050533',
+                bgCard: '#150A52'
             },
-            'rainbow': `  background-size:100%;
-    background: #f15a5a; /* Old browsers */
-    background: -moz-linear-gradient(left, #f15a5a 0%, #f0c419 22%, #4eba6f 45%, #2d95bf 70%, #955ba5 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, #f15a5a 0%,#f0c419 22%,#4eba6f 45%,#2d95bf 70%,#955ba5 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, #f15a5a 0%,#f0c419 22%,#4eba6f 45%,#2d95bf 70%,#955ba5 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f15a5a', endColorstr='#955ba5',GradientType=1 ); /* IE6-9 */
-    `
         }
-        const globalSheet = new Fairybread('global');
-        globalSheet.addSpecial(`@import url('https://fonts.googleapis.com/css?family=Sacramento|Raleway');`);
+const globalSheet = new Fairybread({
+  global: true
+});
+        globalSheet.addSpecial(`@import url('https://fonts.googleapis.com/css?family=Quicksand|Ubuntu');');`);
         globalSheet.add('body', `
-    background-size:7em;
-    font-family:Arial,sans-serf;
+        background-size:7em;
+        font-family:'Ubuntu',sans-serf;
+        background: ${vars.colors.bg};
+        color: #fff;
     `);
         globalSheet.add('p', `
                 line-height:1.4em;
-                color:${vars.colors.black};
-                font-weight:100;
+                font-weight:300;
                 letter-spacing:1px;
                 font-size: 15px;
                 text-align: left
             `);
-        const tag = new Fairybread();
+            globalSheet.add(`a`, `
+                color: ${vars.colors.green};
+            `)
+  const tag = new Fairybread();
         tag.add('.card', `
             color: ${vars.colors.pink}
             background: ${vars.colors.black}
@@ -100,55 +95,67 @@
     text-align:center;
     margin-bottom:2em;
     display:block;
+
     `)
         globalSheet.add(`#buttons a`, `
-        ${vars.rainbow};
         display: inline-block;
-        padding: 15px 7px;
-        margin: 0px;
-        border-radius: 5px;
+        padding: 16px 28px;
         text-decoration:none;
+        background-color: transparent;
+        background: linear-gradient(63.61deg, #2B2DFE -3.2%, #01FAFC 107.1%);
+        border-radius: 30px;
+        margin-right: 24px;
     `)
         globalSheet.add(`#buttons span`, `
-        background:#fff;
+        background:transparent;
         padding: 10px;
         margin: 0px;
-        color:#000;
+        color:#ffffff;
     `)
         var logo = new Fairybread();
         var logo_id = logo.id;
         logo.add('',`text-align:center`)
         logo.add('h1', `
-            ${vars.rainbow};
             font-size:12em;
             float:none;
             display:block;
-            font-family: "Sacramento";
+            font-family: 'Quicksand', sans-serf;
             overflow: visible;
             font-weight:100;
             padding:0em;
             -webkit-text-fill-color: transparent;
             -webkit-background-clip: text;
-            margin:0;
-            `);
+        `);
 
         var card = new Fairybread();
         var card_id = card.id;
         card.add('', `
-        box-shadow:0px 0px 5px rgba(0,0,0,0.5);
-        font-family:Raleway;
-    `)
-        card.add('.color-wrapper', `
-        padding:0.3em;
+        border-radius: 30px;
         overflow:hidden;
-        ${vars.rainbow};
-        margin:1em;
-    `)
+        background: ${vars.colors.bgCard};
+        color: #ffffff;
+        height: 500px;
+        `)
+
         card.add('img', `width:100%;`)
-        card.add('h1', `padding:0px 10px;  margin:0px;`)
-        card.add('p', `color:grey; padding:10px;`)
-        card.add('a', `color:grey; padding:1em; width:100%; background:#efefef; display:block; text-decoration:none;`)
-        card.add('a:hover', `background:${vars.colors.yellow}; color:${vars.colors.orange}`)
+        card.add('h1', `
+            padding:0px 10px;
+            margin:16px 0;
+            font-family: 'Quicksand', sans-serf;
+        `)
+        card.add('p', `color:#ffffff; padding:10px;`)
+        card.add('a', `
+            background: linear-gradient(63.61deg, #6A00FD -3.2%, #FF05FA 107.1%);
+            border-radius: 30px;
+            margin-left: 16px;
+            float:left;
+            padding: 16px 28px;
+            text-decoration:none;
+            color: #ffffff;
+        `)
+        card.add('a:hover', `
+        background: linear-gradient(63.04deg, #6A00FD -44.43%, #FF05FA 107.21%);
+        `)
 
         globalSheet.ensure('tachyons', 'https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css')
         globalSheet.render('head')
@@ -157,7 +164,16 @@
         card.ensure('tachyons', 'https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css')
         logo.render('body');
 
-
+          var cssTag = new Fairybread().css`
+            :host {
+              color: black;
+            }
+            :host a {
+              color: hotpink;
+            }
+          `
+        console.log(cssTag);
+        console.log(cssTag.id);
         // Add css classes
         document.getElementById('card-style').innerHTML = card.render('raw').css;
         document.getElementById('header').classList += ' ' + logo_id;

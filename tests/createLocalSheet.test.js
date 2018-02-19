@@ -1,19 +1,21 @@
-const Fairybread = require('../src/fairybread');
-
+const Fairybread = require('../dist/fairybread');
+const options = {
+	global: false
+}
 const sheet = new Fairybread('local');
 const idTest = [
-	new Fairybread('local'),
-	new Fairybread('local'),
-	new Fairybread('local'),
-	new Fairybread('local'),
-	new Fairybread('local'),
-	new Fairybread('local'),
-	new Fairybread('local'),
-	new Fairybread('local'),
-	new Fairybread('local'),
-	new Fairybread('local'),
-	new Fairybread('local'),
-	new Fairybread('local')
+	new Fairybread(options),
+	new Fairybread(options),
+	new Fairybread(options),
+	new Fairybread(options),
+	new Fairybread(options),
+	new Fairybread(options),
+	new Fairybread(options),
+	new Fairybread(options),
+	new Fairybread(options),
+	new Fairybread(options),
+	new Fairybread(options),
+	new Fairybread(options)
 ];
 
 test(`Is Sheet's defined`, () => {
