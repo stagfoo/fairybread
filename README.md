@@ -12,12 +12,12 @@
 take control of your style tags. create, share, extend and render css with javacsript
 </p>
 
+
 # Includes
 - 🏡 Structured & clear
 - 🔮 Css in js
 - ⚙️ Functional
 - 🤷‍♀️ framework agnostic
-
 
 ## Basic Setup
 ```js
