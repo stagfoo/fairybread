@@ -11,7 +11,8 @@
       "allowSyntheticDefaultImports": true,
       "module": "amd",
       "noResolve": true,
-      "moduleResolution": "node"
+      "moduleResolution": "node",
+      "diagnostics": true
   },
   "include": [
     "src/**/*"
