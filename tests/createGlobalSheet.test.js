@@ -1,4 +1,4 @@
-const Fairybread = require('../src/fairybread');
+const Fairybread = require('../dist/fairybread');
 
 const sheet = new Fairybread({
 	global: true

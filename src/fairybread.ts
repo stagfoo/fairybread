@@ -3,9 +3,9 @@ function Fairybread(options) {
   if(typeof options === 'undefined'){
     options = {
       global: false
-    } 
-  }
-  this.sheetType = options.global ? 'global' : 'local';
+    }
+	}
+  this.sheetType = options.global === true ? 'global' : 'local';
 	this.ensureList = {};
   // Create Id
 	function makeId() {
@@ -131,7 +131,7 @@ Fairybread.prototype.addSpecial = function (rule) {
 		styleNode.type = 'text/css';
 		styleNode.id = id;
 		document.body.appendChild(styleNode);
-    this.specialSheet = document.getElementById(id);  
+    this.specialSheet = document.getElementById(id);
     // replace with free function?
 		this.specialSheet.innerHTML = rule;
 	} else {
