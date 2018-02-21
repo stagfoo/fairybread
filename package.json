@@ -2,12 +2,12 @@
   "name": "fairybread",
   "version": "2.0.0",
   "description": "a javascript utility to manage css and match sass functions",
-  "main": "dist/fairybread.min.js",
+  "main": "dist/fairybread.js",
   "scripts": {
     "pretest": "tsc ./src/fairybread.ts --outFile ./dist/fairybread.js",
     "test": "jest",
     "build:docs": "npm run test && tsc ./src/fairybread.ts --outFile ./docs/fairybread.js",
-    "build:release": "npm run test && uglifyjs ./dist/fairybread.js --compress --mangle --output ./dist/fairybread.min.js",
+    "build:release": "npm run test",
     "docs": "npm run test && http-server docs/"
   },
   "repository": {
@@ -28,10 +28,7 @@
   },
   "homepage": "https://github.com/stagfoo/fairybread#readme",
   "devDependencies": {
-    "awesome-typescript-loader": "^3.4.1",
     "jest": "^20.0.1",
-    "typescript": "^2.7.1",
-    "uglify-js": "^3.3.11",
-    "webpack": "^3.11.0"
+    "typescript": "^2.7.1"
   }
 }

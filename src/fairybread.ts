@@ -2,9 +2,11 @@
 function Fairybread(options) {
   if(typeof options === 'undefined'){
     options = {
-      global: false
+			global: false,
+			render: 'head'
     }
 	}
+	this.options = options;
   this.sheetType = options.global === true ? 'global' : 'local';
 	this.ensureList = {};
   // Create Id
@@ -80,6 +82,9 @@ Fairybread.prototype.render = function (location) {
 	var bindSheet = this.bindSheet;
 	var scopeClass = this.scopeClass;
 	var rulesRef = Object.keys(sheetRules);
+	if(typeof location !== 'undefined'){
+		this.options.render = location;
+	}
     // Generate a plain text style sheet
 	function renderFlat() {
 		var echoSheet = '';
@@ -91,7 +96,7 @@ Fairybread.prototype.render = function (location) {
 		return echoSheet;
 	}
 
-	switch (location) {
+	switch (this.options.render) {
 		case 'raw':
 			var flatSheet = renderFlat();
 			this.sheet.innerHTML = flatSheet;
@@ -142,9 +147,23 @@ Fairybread.prototype.addSpecial = function (rule) {
 Fairybread.prototype.css = function (css, ...v){
   var flat = css.map(((str,i) => {
     return this.replaceHost(str, this.scopedClass) + (v[i] || '')
-  })).join('');
+	})).join('');
 	this.sheet.innerHTML = flat;
-	return this.sheet
+	this.rendered = true;
+
+	let returnVal = this.sheet
+	switch (this.options.render) {
+		case 'raw':
+			returnVal = {
+				css: flat,
+				id: this.id
+			}
+			break;
+		default:
+			returnVal = this.sheet
+			break;
+	}
+	return returnVal
 }
 
 Fairybread.prototype.ensure = function (key, path) {

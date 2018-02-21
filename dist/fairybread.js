@@ -1,9 +1,11 @@
 function Fairybread(options) {
     if (typeof options === 'undefined') {
         options = {
-            global: false
+            global: false,
+            render: 'head'
         };
     }
+    this.options = options;
     this.sheetType = options.global === true ? 'global' : 'local';
     this.ensureList = {};
     // Create Id
@@ -75,6 +77,9 @@ Fairybread.prototype.render = function (location) {
     var bindSheet = this.bindSheet;
     var scopeClass = this.scopeClass;
     var rulesRef = Object.keys(sheetRules);
+    if (typeof location !== 'undefined') {
+        this.options.render = location;
+    }
     // Generate a plain text style sheet
     function renderFlat() {
         var echoSheet = '';
@@ -85,7 +90,7 @@ Fairybread.prototype.render = function (location) {
         echoSheet = echoSheet.replace(/(\r\n|\n|\r)/gm, '').trim();
         return echoSheet;
     }
-    switch (location) {
+    switch (this.options.render) {
         case 'raw':
             var flatSheet = renderFlat();
             this.sheet.innerHTML = flatSheet;
@@ -141,7 +146,20 @@ Fairybread.prototype.css = function (css) {
         return _this.replaceHost(str, _this.scopedClass) + (v[i] || '');
     })).join('');
     this.sheet.innerHTML = flat;
-    return this.sheet;
+    this.rendered = true;
+    var returnVal = this.sheet;
+    switch (this.options.render) {
+        case 'raw':
+            returnVal = {
+                css: flat,
+                id: this.id
+            };
+            break;
+        default:
+            returnVal = this.sheet;
+            break;
+    }
+    return returnVal;
 };
 Fairybread.prototype.ensure = function (key, path) {
     // Check if this sheet has already ensured it

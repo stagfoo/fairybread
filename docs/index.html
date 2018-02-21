@@ -62,10 +62,11 @@ const globalSheet = new Fairybread({
         font-family:'Ubuntu',sans-serf;
         background: ${vars.colors.bg};
         color: #fff;
+        font-weight: 100;
     `);
         globalSheet.add('p', `
                 line-height:1.4em;
-                font-weight:300;
+                font-weight:100;
                 letter-spacing:1px;
                 font-size: 15px;
                 text-align: left
@@ -110,10 +111,13 @@ const globalSheet = new Fairybread({
         globalSheet.add(`#buttons span`, `
         background:transparent;
         padding: 10px;
+        font-weight: 100;
         margin: 0px;
         color:#ffffff;
     `)
-        var logo = new Fairybread();
+        var logo = new Fairybread({
+            render: 'body'
+        });
         var logo_id = logo.id;
         logo.add('',`text-align:center`)
         logo.add('h1', `
@@ -156,6 +160,7 @@ const globalSheet = new Fairybread({
             float:left;
             padding: 16px 28px;
             text-decoration:none;
+            font-weight: 100;
             color: #ffffff;
         `)
         console.log(card.rules['a'])
@@ -164,22 +169,35 @@ const globalSheet = new Fairybread({
         `)
 
         globalSheet.ensure('tachyons', 'https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css')
-        globalSheet.render('head')
+        // Default Render Location
+        globalSheet.render()
 
         logo.ensure('tachyons', 'https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css')
         card.ensure('tachyons', 'https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css')
-        logo.render('body');
+        logo.render();
 
-          var cssTag = new Fairybread().css`
+        var cssTag = new Fairybread().css`
             :host {
-              color: black;
+                color: black;
             }
             :host a {
-              color: hotpink;
+                color: hotpink;
             }
-          `
+        `
+        var cssTagRaw = new Fairybread({
+            render:'raw'
+        }).css`
+            :host {
+                color: black;
+            }
+            :host a {
+                color: hotpink;
+            }
+        `
         console.log(cssTag);
         console.log(cssTag.id);
+        console.log(cssTagRaw);
+        console.log(cssTagRaw.id);
         // Add css classes
         document.getElementById('card-style').innerHTML = card.render('raw').css;
         document.getElementById('header').classList += ' ' + logo_id;
