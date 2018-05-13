@@ -28,7 +28,10 @@
   },
   "homepage": "https://github.com/stagfoo/fairybread#readme",
   "devDependencies": {
+    "@types/jest": "^22.2.3",
+    "@types/typescript": "^2.0.0",
     "jest": "^20.0.1",
-    "typescript": "^2.7.1"
+    "typescript": "^2.3.4",
+    "@types/node": "^8.0.5"
   }
 }
