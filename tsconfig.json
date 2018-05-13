@@ -7,7 +7,7 @@
       "paths": {
         "*": ["*"]
       },
-      "lib": [ "dom", "esnext" ],
+      "lib": [ "dom", "esnext", "node" ],
       "allowSyntheticDefaultImports": true,
       "module": "amd",
       "noResolve": true,

@@ -122,6 +122,8 @@ it will return a Style tag dom element for inclusion by you.
 this function will replace `:host` with the scoped tag, if you don't include `:host` it will be global
 because of this, you can mimic the `addSpecial` function as well.
 
+This method can't be used with `extend`, `add` or the default `render`;
+
 ## Extend
 Pretty much just object syntax from javascript
 ```js
