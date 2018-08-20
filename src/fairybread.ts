@@ -32,7 +32,7 @@ function Fairybread(options) {
 		return styleNode;
 	};
 	this.bindSheet = function (node, location) {
-		document[location].appendChild(node);
+		location.appendChild(node);
 	};
   // Create Js Object from Css text
 	this.cssToJs = function (css) {
@@ -89,7 +89,6 @@ Fairybread.prototype.render = function (location) {
 	function renderFlat() {
 		var echoSheet = '';
     rulesRef.map(key => {
-      //TODO allow host
 			echoSheet += scopeClass + ' ' + key + '{' + sheetRules[key].css + '}';
 		});
 		echoSheet = echoSheet.replace(/(\r\n|\n|\r)/gm, '').trim();
@@ -112,15 +111,19 @@ Fairybread.prototype.render = function (location) {
 				id: this.id
 			};
 			break;
-
+		case 'shadowDOM':
+      bindSheet(thisSheet, this.options.shadow);
+			thisSheet.innerHTML = renderFlat();
+			result = this.id;
+			break;
 		case 'body':
-			bindSheet(thisSheet, 'body');
+			bindSheet(thisSheet, document['body']);
 			thisSheet.innerHTML = renderFlat();
 			result = this.id;
 			break;
 		case 'head':
 		default:
-			bindSheet(thisSheet, 'head');
+			bindSheet(thisSheet, document['head']);
 			thisSheet.innerHTML = renderFlat();
 			result = this.id;
 			break;
